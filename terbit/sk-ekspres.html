@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&K Terbit Ekspres (VIP) - Cendekia Aksara Press</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
+            --white: #ffffff;
+            --gray: #666666;
+            --light-bg: #fffbf0; /* Premium Cream Background */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: var(--light-bg); 
+            min-height: 100vh; 
+            display: flex; flex-direction: column; 
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--navy-dark);
+            padding: 10px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        
+        .header-logo-wrapper {
+            width: 45px; height: 45px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--mustard);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header-logo { width: 60%; height: auto; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+
+        /* Tombol Kembali */
+        .btn-back {
+            color: var(--mustard);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+            border: 1px solid var(--mustard);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        .btn-back:hover { background: var(--mustard); color: var(--navy-dark); }
+
+        /* --- MAIN CONTENT --- */
+        main { flex: 1; padding: 30px 20px; max-width: 900px; margin: 0 auto; width: 100%; }
+
+        .doc-header { text-align: center; margin-bottom: 40px; }
+        .doc-header h1 { font-size: 1.8rem; color: var(--navy-dark); margin-bottom: 10px; }
+        .doc-header p { color: var(--gray); font-size: 0.9rem; }
+        .badge-ekspres { 
+            background: var(--mustard); color: var(--navy-dark); padding: 5px 20px; 
+            border-radius: 5px; font-weight: 700; font-size: 0.9rem; display: inline-block; margin-top: 10px;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.4);
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* --- CONTENT STYLING --- */
+        .legal-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-top: 5px solid var(--mustard);
+        }
+
+        .warning-box {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: 30px;
+            border: 1px solid #ffcdd2;
+            display: flex; align-items: start; gap: 15px;
+            line-height: 1.6;
+        }
+
+        .bab-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--navy-dark);
+            background: #f0f4f8;
+            padding: 10px 15px;
+            border-left: 5px solid var(--mustard);
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .pasal-group { margin-bottom: 15px; }
+        .pasal-title { font-weight: 700; font-size: 0.9rem; color: var(--navy-light); margin-bottom: 3px; }
+        .pasal-content { font-size: 0.85rem; color: #444; line-height: 1.6; padding-left: 0; margin-bottom: 15px; text-align: justify; }
+        .pasal-content ul { padding-left: 20px; margin-top: 5px; }
+        .pasal-content li { margin-bottom: 5px; }
+
+        /* --- PRICING BOX PREMIUM --- */
+        .pricing-alert {
+            background: #fff8e1;
+            border: 2px solid var(--mustard);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .pricing-tag {
+            position: absolute; top: -15px; right: 20px;
+            background: var(--navy-dark); color: var(--mustard);
+            padding: 5px 15px; font-weight: bold; border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        .pricing-alert h4 { color: var(--navy-dark); margin-bottom: 20px; font-weight: 700; font-size: 1.2rem; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
+        .package-item { margin-bottom: 20px; border-bottom: 1px dashed #ccc; padding-bottom: 15px; }
+        .package-item:last-child { border-bottom: none; margin-bottom: 0; }
+        .pkg-name { font-weight: 700; color: var(--navy-dark); font-size: 1rem; display: block; }
+        .pkg-price { color: #e65100; font-weight: 700; font-size: 1.1rem; float: right; }
+        .pkg-desc { font-size: 0.85rem; color: #555; display: block; margin-top: 5px; }
+        .pkg-bonus { display: block; margin-top: 5px; font-size: 0.8rem; color: #2e7d32; font-weight: 600; }
+
+        /* --- FOOTER --- */
+        footer { 
+            background-color: var(--navy-dark); color: var(--white); 
+            padding: 20px; font-size: 0.75rem; text-align: center; margin-top: auto; 
+        }
+
+        @media (max-width: 768px) {
+            .legal-section { padding: 20px; }
+            .pkg-price { float: none; display: block; margin-top: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logo-wrapper">
+                <img src="https://i.imgur.com/5Srjyo4.png" alt="Logo" class="header-logo">
+            </div>
+            <div class="header-title">S&K EKSPRES</div>
+        </div>
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> <span style="display:none; display:md-block;">Kembali</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="doc-header">
+            <h1>Kontrak Layanan Ekspres (VIP)</h1>
+            <p>Dokumen Perjanjian Kerjasama Penerbitan Prioritas</p>
+            <div class="badge-ekspres">PREMIUM SERVICE</div>
+        </div>
+
+        <div class="legal-section">
+            <div class="warning-box">
+                <i class="fas fa-file-contract fa-2x"></i>
+                <div>
+                    <b>KONTRAK MENGIKAT SECARA HUKUM</b><br>
+                    Dokumen ini terdiri dari <b>70 Pasal</b> yang mengatur hak dan kewajiban antara Penulis dan Cendekia Aksara Press. Dengan melakukan pembayaran paket, Penulis dianggap telah membaca, memahami, dan menyetujui seluruh klausul tanpa terkecuali.
+                </div>
+            </div>
+
+            <div class="bab-title">BAB I: DEFINISI DAN RUANG LINGKUP</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 1: Definisi Layanan Ekspres</div>
+                <div class="pasal-content">Layanan Terbit Ekspres adalah layanan penerbitan jalur cepat (Fast Track) yang disediakan oleh Cendekia Aksara Press dengan jaminan prioritas dalam antrean layout, desain, dan produksi.</div>
+                
+                <div class="pasal-title">Pasal 2: Pihak Pertama (Penerbit)</div>
+                <div class="pasal-content">Cendekia Aksara Press bertindak sebagai penyedia jasa (fasilitator) yang bertanggung jawab atas proses teknis pracetak dan produksi buku fisik.</div>
+                
+                <div class="pasal-title">Pasal 3: Pihak Kedua (Penulis)</div>
+                <div class="pasal-content">Penulis adalah individu atau kelompok yang menyerahkan naskah dan membayar biaya layanan untuk diterbitkan bukunya.</div>
+                
+                <div class="pasal-title">Pasal 4: Objek Perjanjian</div>
+                <div class="pasal-content">Objek perjanjian adalah naskah buku (fiksi/non-fiksi) yang akan diproses menjadi buku cetak dan buku digital (E-Book).</div>
+
+                <div class="pasal-title">Pasal 5: Sifat Layanan</div>
+                <div class="pasal-content">Layanan ini bersifat "Jasa Putus". Penulis membayar jasa produksi, dan keuntungan penjualan buku sepenuhnya menjadi hak Penulis (Self-Publishing).</div>
+            </div>
+
+            <div class="bab-title">BAB II: PAKET DAN HARGA LAYANAN</div>
+            
+            <div class="pricing-alert">
+                <div class="pricing-tag">UPDATE 2026</div>
+                <h4>📦 Pilihan Paket Prioritas</h4>
+                
+                <div class="package-item">
+                    <span class="pkg-name">1. PAKET SILVER VIP <span class="pkg-price">Rp 250.000,-</span></span>
+                    <span class="pkg-desc">Layout Ekspres + QRCBN + Cover Template Premium.</span>
+                    <span class="pkg-bonus"><i class="fas fa-gift"></i> Dapat 2 Buku Cetak (Softcover)</span>
+                </div>
+                
+                <div class="package-item">
+                    <span class="pkg-name">2. PAKET GOLD VIP <span class="pkg-price">Rp 500.000,-</span></span>
+                    <span class="pkg-desc">Layout Premium + Proofreading + Cover Custom.</span>
+                    <span class="pkg-bonus"><i class="fas fa-gift"></i> Dapat 3 Buku Cetak (Softcover)</span>
+                </div>
+                
+                <div class="package-item">
+                    <span class="pkg-name">3. PAKET PLATINUM (SULTAN) <span class="pkg-price">Rp 750.000,-</span></span>
+                    <span class="pkg-desc">Full Editing + Layout + Cover Custom + Merchandise.</span>
+                    <span class="pkg-bonus"><i class="fas fa-gift"></i> Dapat 5 Buku Cetak (Softcover)</span>
+                </div>
+            </div>
+
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 6: Komponen Harga</div>
+                <div class="pasal-content">Harga di atas mencakup jasa profesional tim (Editor, Layouter, Desainer), biaya produksi cetak buku bukti terbit, dan administrasi server QRCBN.</div>
+
+                <div class="pasal-title">Pasal 7: Batasan Halaman</div>
+                <div class="pasal-content">Harga paket berlaku untuk naskah dengan ketebalan maksimal:
+                    <ul>
+                        <li>Silver: Maks 200 Halaman A5.</li>
+                        <li>Gold: Maks 250 Halaman A5.</li>
+                        <li>Platinum: Maks 300 Halaman A5.</li>
+                    </ul>
+                </div>
+
+                <div class="pasal-title">Pasal 8: Biaya Kelebihan Halaman</div>
+                <div class="pasal-content">Jika naskah melebihi batas halaman, dikenakan biaya tambahan cetak sebesar <b>Rp 150,- per halaman</b> dikalikan jumlah buku yang didapat.</div>
+
+                <div class="pasal-title">Pasal 9: Tidak Termasuk Ongkir</div>
+                <div class="pasal-content">Harga paket <b>BELUM TERMASUK</b> ongkos kirim dari gudang Temanggung/Magelang ke alamat Penulis.</div>
+            </div>
+
+            <div class="bab-title">BAB III: SISTEM PEMBAYARAN</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 10: Wajib Lunas (Full Payment)</div>
+                <div class="pasal-content">Pembayaran paket Ekspres wajib dilunasi 100% di muka sebelum naskah diproses. Tidak menerima sistem DP (Down Payment) untuk menjaga kecepatan alur kerja.</div>
+
+                <div class="pasal-title">Pasal 11: Metode Pembayaran</div>
+                <div class="pasal-content">Pembayaran hanya melalui rekening resmi yang tertera pada Invoice Digital. Pembayaran tunai/cash tidak dilayani.</div>
+
+                <div class="pasal-title">Pasal 12: Verifikasi Pembayaran</div>
+                <div class="pasal-content">Proses pengerjaan dimulai H+1 setelah bukti transfer diverifikasi valid oleh tim keuangan.</div>
+
+                <div class="pasal-title">Pasal 13: Invoice Resmi</div>
+                <div class="pasal-content">Penulis berhak mendapatkan bukti bayar sah (E-Invoice/E-Receipt) dari Cendekia Aksara.</div>
+
+                <div class="pasal-title">Pasal 14: Pajak</div>
+                <div class="pasal-content">Harga yang tertera belum termasuk PPN (jika ada perubahan regulasi pemerintah). Saat ini harga masih net.</div>
+            </div>
+
+            <div class="bab-title">BAB IV: KETENTUAN NASKAH</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 15: Format File</div>
+                <div class="pasal-content">Naskah wajib dalam format .DOCX (Microsoft Word). Format PDF tidak diterima karena tidak bisa diedit/dilayout.</div>
+
+                <div class="pasal-title">Pasal 16: Kelengkapan</div>
+                <div class="pasal-content">File harus lengkap (Judul, Nama Penulis, Daftar Isi, Isi Cerita, Biodata). Naskah yang tidak lengkap akan dikembalikan untuk dilengkapi, yang dapat menunda durasi pengerjaan.</div>
+
+                <div class="pasal-title">Pasal 17: Orisinalitas</div>
+                <div class="pasal-content">Penulis menjamin naskah adalah karya asli, bukan plagiat, dan belum pernah diterbitkan penerbit lain dengan status kontrak aktif.</div>
+
+                <div class="pasal-title">Pasal 18: Larangan Isi</div>
+                <div class="pasal-content">Naskah dilarang memuat konten pornografi, perjudian, fitnah, atau hal yang melanggar UU ITE Indonesia.</div>
+
+                <div class="pasal-title">Pasal 19: Penolakan Naskah</div>
+                <div class="pasal-content">Penerbit berhak menolak naskah yang dinilai melanggar Pasal 18 meskipun pembayaran sudah dilakukan (Lihat BAB Refund).</div>
+            </div>
+
+            <div class="bab-title">BAB V: PROSES EDITORIAL & LAYOUT</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 20: Lingkup Editing (Platinum)</div>
+                <div class="pasal-content">Paket Platinum mendapat fasilitas <i>Substantive Editing</i>: perbaikan logika cerita, struktur kalimat, dan PUEBI tanpa mengubah gaya bahasa penulis.</div>
+
+                <div class="pasal-title">Pasal 21: Lingkup Proofreading (Gold)</div>
+                <div class="pasal-content">Paket Gold hanya mendapat perbaikan salah ketik (typo) dan tanda baca dasar. Tidak ada bedah naskah mendalam.</div>
+
+                <div class="pasal-title">Pasal 22: Tanpa Editing (Silver)</div>
+                <div class="pasal-content">Paket Silver naskah langsung di-layout sesuai apa yang dikirim penulis. Kesalahan ketik menjadi tanggung jawab penulis.</div>
+
+                <div class="pasal-title">Pasal 23: Jatah Revisi Layout</div>
+                <div class="pasal-content">Penulis diberikan kesempatan revisi layout maksimal 2x (dua kali). Revisi meliputi: salah pemenggalan kata atau tata letak gambar.</div>
+
+                <div class="pasal-title">Pasal 24: Larangan Revisi Mayor</div>
+                <div class="pasal-content">Revisi layout tidak boleh mengubah lebih dari 20% isi naskah (menulis ulang bab). Jika terjadi, dikenakan biaya layout ulang Rp 100.000.</div>
+            </div>
+
+            <div class="bab-title">BAB VI: DESAIN SAMPUL (COVER)</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 25: Custom Cover (Gold & Platinum)</div>
+                <div class="pasal-content">Penulis berhak mengajukan referensi gambar atau konsep. Desainer akan membuatkan 2 alternatif desain.</div>
+
+                <div class="pasal-title">Pasal 26: Template Premium (Silver)</div>
+                <div class="pasal-content">Paket Silver menggunakan template eksklusif penerbit. Penulis hanya bisa memilih dari katalog, tidak bisa request gambar baru.</div>
+
+                <div class="pasal-title">Pasal 27: Hak Cipta Gambar</div>
+                <div class="pasal-content">Penerbit menggunakan aset gambar berlisensi (Stock Photo) atau AI Generative yang legal.</div>
+
+                <div class="pasal-title">Pasal 28: Revisi Desain</div>
+                <div class="pasal-content">Revisi desain maksimal 2x (dua kali) revisi minor (ganti font/warna). Ganti konsep total dikenakan biaya tambahan.</div>
+
+                <div class="pasal-title">Pasal 29: File Mentah</div>
+                <div class="pasal-content">Penulis tidak mendapatkan file mentah (.PSD/.AI) desain cover, hanya file jadi (.JPG/.PDF).</div>
+            </div>
+
+            <div class="bab-title">BAB VII: PRODUKSI CETAK</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 30: Spesifikasi Buku</div>
+                <div class="pasal-content">Standar cetak: Kertas Bookpaper 57gsm/72gsm, Softcover Ivory 260, Laminasi Doff/Glossy, Binding Lem Panas.</div>
+
+                <div class="pasal-title">Pasal 31: Toleransi Warna</div>
+                <div class="pasal-content">Hasil cetak warna cover mungkin memiliki perbedaan 5-10% dengan tampilan di layar HP/Monitor (RGB vs CMYK). Ini wajar.</div>
+
+                <div class="pasal-title">Pasal 32: Waktu Produksi</div>
+                <div class="pasal-content">Proses cetak memakan waktu 3-7 hari kerja setelah layout disetujui (ACC) oleh penulis.</div>
+
+                <div class="pasal-title">Pasal 33: Cacat Produksi</div>
+                <div class="pasal-content">Kategori cacat yang diganti: Halaman hilang, halaman terbalik, tinta pudar total, cover sobek, lem lepas.</div>
+
+                <div class="pasal-title">Pasal 34: Bukan Cacat</div>
+                <div class="pasal-content">Kertas bergelombang sedikit karena kelembaban udara atau lem yang sedikit meluber di punggung buku tidak termasuk cacat produksi mayor.</div>
+            </div>
+
+            <div class="bab-title">BAB VIII: JAMINAN WAKTU (SLA)</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 35: Target Waktu</div>
+                <div class="pasal-content">Penerbit menargetkan seluruh proses (Naskah masuk s.d. Resi keluar) maksimal 30 Hari Kerja.</div>
+
+                <div class="pasal-title">Pasal 36: Keterlambatan Penulis</div>
+                <div class="pasal-content">Jika Penulis lambat merespons chat revisi atau lambat memberikan ACC, maka target waktu gugur dan durasi pengerjaan bertambah.</div>
+
+                <div class="pasal-title">Pasal 37: Kompensasi Keterlambatan Penerbit</div>
+                <div class="pasal-content">Jika keterlambatan murni kesalahan Penerbit melebihi 7 hari dari target, Penulis berhak mendapat voucher diskon 20% untuk cetak selanjutnya.</div>
+            </div>
+
+            <div class="bab-title">BAB IX: PENGIRIMAN & LOGISTIK</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 38: Pilihan Ekspedisi</div>
+                <div class="pasal-content">Kami menggunakan JNE, J&T, SiCepat, atau Cargo (untuk jumlah banyak).</div>
+
+                <div class="pasal-title">Pasal 39: Risiko Pengiriman</div>
+                <div class="pasal-content">Segala kerusakan (penyok/basah) atau kehilangan yang terjadi saat barang sudah di tangan Kurir Ekspedisi adalah di luar tanggung jawab Penerbit.</div>
+
+                <div class="pasal-title">Pasal 40: Asuransi</div>
+                <div class="pasal-content">Penulis disarankan meminta admin mengaktifkan Asuransi Pengiriman (biaya tambahan) untuk keamanan paket.</div>
+
+                <div class="pasal-title">Pasal 41: Salah Alamat</div>
+                <div class="pasal-content">Paket yang retur/kembali karena Penulis salah memberikan alamat akan dikirim ulang dengan ongkir ditanggung Penulis lagi.</div>
+            </div>
+
+            <div class="bab-title">BAB X: KEBIJAKAN PEMBATALAN & REFUND (KETAT)</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 42: Masa Pikir (Cooling Off)</div>
+                <div class="pasal-content">Refund 100% hanya bisa dilakukan maksimal <b>3 Jam</b> setelah transfer. Lebih dari itu dianggap dana masuk sistem.</div>
+
+                <div class="pasal-title">Pasal 43: Refund 50%</div>
+                <div class="pasal-content">Jika Penulis membatalkan saat proses belum dimulai (maksimal 1x24 jam), dana dikembalikan 50%.</div>
+
+                <div class="pasal-title">Pasal 44: Dana Hangus (Non-Refundable)</div>
+                <div class="pasal-content">Jika Tim Desain/Layout sudah mulai bekerja (biasanya H+1), dana <b>HANGUS 100%</b> dan tidak dapat diminta kembali dengan alasan apapun.</div>
+
+                <div class="pasal-title">Pasal 45: Pembatalan Paksa</div>
+                <div class="pasal-content">Jika Penulis melakukan tindakan tidak menyenangkan (teror/ancaman) kepada staff, Penerbit berhak memutus kontrak sepihak dan dana hangus.</div>
+            </div>
+
+            <div class="bab-title">BAB XI: HAK CIPTA & LISENSI</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 46: Hak Moral</div>
+                <div class="pasal-content">Nama Penulis akan selalu dicantumkan dalam buku. Hak Cipta cerita 100% milik Penulis.</div>
+
+                <div class="pasal-title">Pasal 47: File Master</div>
+                <div class="pasal-content">Penulis berhak mendapatkan softfile PDF Final buku (Watermarked). File InDesign/Mentah tidak diberikan.</div>
+
+                <div class="pasal-title">Pasal 48: Hak Jual Kembali</div>
+                <div class="pasal-content">Penulis bebas menjual bukunya sendiri dengan harga berapapun.</div>
+
+                <div class="pasal-title">Pasal 49: Lisensi Promosi</div>
+                <div class="pasal-content">Penerbit berhak menggunakan cover buku dan sinopsis untuk materi promosi di media sosial Cendekia Aksara.</div>
+            </div>
+
+            <div class="bab-title">BAB XII: PENYELESAIAN SENGKETA</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 50: Musyawarah</div>
+                <div class="pasal-content">Segala perselisihan diselesaikan diutamakan dengan jalur musyawarah kekeluargaan.</div>
+                
+                <div class="pasal-title">Pasal 51: Jalur Hukum</div>
+                <div class="pasal-content">Jika musyawarah gagal, penyelesaian hukum dilakukan di wilayah hukum Pengadilan Negeri setempat (Temanggung/Magelang).</div>
+            </div>
+
+            <div class="bab-title">BAB XIII: KETENTUAN TAMBAHAN (LAIN-LAIN)</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 52 s.d. Pasal 70 (Detail Teknis & Etika)</div>
+                <div class="pasal-content">
+                    <ul>
+                        <li><b>Pasal 52:</b> Penulis dilarang mengirimkan bukti transfer palsu.</li>
+                        <li><b>Pasal 53:</b> Admin berhak memblokir nomor WA Penulis yang melakukan spamming di luar jam kerja.</li>
+                        <li><b>Pasal 54:</b> Revisi dilakukan via email agar terekam jejaknya, bukan via WA.</li>
+                        <li><b>Pasal 55:</b> Penerbit tidak menyimpan file naskah lebih dari 6 bulan setelah terbit. Penulis wajib simpan backup.</li>
+                        <li><b>Pasal 56:</b> Bonus merchandise tidak bisa diuangkan.</li>
+                        <li><b>Pasal 57:</b> Kerusakan merchandise saat pengiriman tidak diganti.</li>
+                        <li><b>Pasal 58:</b> Jika QRCBN error, Penerbit akan memperbaiki link digitalnya.</li>
+                        <li><b>Pasal 59:</b> Buku yang sudah dicetak tidak bisa direvisi isinya (harus cetak ulang biaya baru).</li>
+                        <li><b>Pasal 60:</b> Warna kertas bookpaper bisa berubah supply dari pabrik (sedikit lebih terang/gelap) tanpa pemberitahuan.</li>
+                        <li><b>Pasal 61:</b> Penulis menjamin foto diri di biodata adalah foto asli.</li>
+                        <li><b>Pasal 62:</b> Penulis dilarang membajak karyawan Cendekia untuk pengerjaan pribadi di luar sistem.</li>
+                        <li><b>Pasal 63:</b> Promo diskon tidak dapat digabungkan.</li>
+                        <li><b>Pasal 64:</b> Penerbit berhak menampilkan buku di pameran sebagai contoh portofolio.</li>
+                        <li><b>Pasal 65:</b> Jika Penulis meninggal dunia, hak komunikasi dialihkan ke ahli waris.</li>
+                        <li><b>Pasal 66:</b> Perubahan alamat kirim maksimal 3 hari sebelum cetak selesai.</li>
+                        <li><b>Pasal 67:</b> Force Majeure (Bencana Alam) membatalkan denda keterlambatan penerbit.</li>
+                        <li><b>Pasal 68:</b> Aturan ini dapat berubah sewaktu-waktu.</li>
+                        <li><b>Pasal 69:</b> Syarat & Ketentuan ini sah tanpa materai fisik.</li>
+                        <li><b>Pasal 70:</b> Penulis tunduk pada seluruh aturan Cendekia Aksara Press.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; color: var(--navy-dark); font-weight: 600;">
+                Terakhir Diperbarui: Januari 2026<br>
+                Tim Legal & Manajemen Cendekia Aksara Press
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cendekia Aksara Press. Hak Cipta Dilindungi Undang-Undang.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "../index.html";
+            }
+        });
+    </script>
+</body>
+</html>
