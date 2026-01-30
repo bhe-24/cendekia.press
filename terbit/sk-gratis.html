@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&K Terbit Gratis - Cendekia Aksara Press</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
+            --white: #ffffff;
+            --gray: #666666;
+            --light-bg: #f8f9fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: var(--light-bg); 
+            min-height: 100vh; 
+            display: flex; flex-direction: column; 
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--navy-dark);
+            padding: 10px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        
+        .header-logo-wrapper {
+            width: 45px; height: 45px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--mustard);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header-logo { width: 60%; height: auto; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+
+        /* Tombol Kembali */
+        .btn-back {
+            color: var(--mustard);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+            border: 1px solid var(--mustard);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        .btn-back:hover { background: var(--mustard); color: var(--navy-dark); }
+
+        /* --- MAIN CONTENT --- */
+        main { flex: 1; padding: 30px 20px; max-width: 900px; margin: 0 auto; width: 100%; }
+
+        .doc-header { text-align: center; margin-bottom: 40px; }
+        .doc-header h1 { font-size: 1.8rem; color: var(--navy-dark); margin-bottom: 10px; }
+        .doc-header p { color: var(--gray); font-size: 0.9rem; }
+        .badge-free { 
+            background: #00C851; color: white; padding: 5px 15px; 
+            border-radius: 5px; font-weight: 700; font-size: 0.8rem; display: inline-block; margin-top: 10px;
+        }
+
+        /* --- CONTENT STYLING --- */
+        .legal-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .bab-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--navy-dark);
+            border-bottom: 2px solid var(--mustard);
+            padding-bottom: 10px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .pasal-group { margin-bottom: 20px; }
+        .pasal-title { font-weight: 700; font-size: 0.95rem; color: var(--navy-light); margin-bottom: 5px; }
+        .pasal-content { font-size: 0.9rem; color: #444; line-height: 1.6; padding-left: 20px; margin-bottom: 10px; }
+        .pasal-content li { margin-bottom: 5px; }
+
+        /* --- PRICING BOX (ADD ON) --- */
+        .pricing-alert {
+            background: #fff8e1;
+            border: 2px dashed var(--mustard);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .pricing-alert h4 { color: #856404; margin-bottom: 10px; }
+        .price-list { list-style: none; }
+        .price-list li { display: flex; justify-content: space-between; border-bottom: 1px solid #ddd; padding: 8px 0; font-size: 0.9rem; }
+        .price-list li:last-child { border-bottom: none; }
+        .price-tag { font-weight: 700; color: var(--navy-dark); }
+
+        /* --- FOOTER --- */
+        footer { 
+            background-color: var(--navy-dark); color: var(--white); 
+            padding: 20px; font-size: 0.75rem; text-align: center; margin-top: auto; 
+        }
+
+        @media (max-width: 768px) {
+            .legal-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logo-wrapper">
+                <img src="https://i.imgur.com/5Srjyo4.png" alt="Logo" class="header-logo">
+            </div>
+            <div class="header-title">SYARAT & KETENTUAN</div>
+        </div>
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> <span style="display:none; display:md-block;">Kembali</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="doc-header">
+            <h1>Program Penerbitan Gratis (Indie)</h1>
+            <p>Dokumen Legalitas & Aturan Main Cendekia Aksara Press</p>
+            <div class="badge-free">BIAYA LAYANAN: Rp 0,-</div>
+        </div>
+
+        <div class="legal-section">
+            <p style="text-align: justify;">
+                Dengan mengirimkan naskah ke program "Terbit Gratis" Cendekia Aksara Press, Penulis dianggap telah membaca, memahami, dan menyetujui seluruh isi perjanjian di bawah ini.
+            </p>
+
+            <div class="bab-title">BAB I: KETENTUAN UMUM</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 1: Definisi Layanan</div>
+                <div class="pasal-content">Layanan Terbit Gratis adalah fasilitas penerbitan naskah digital (E-Book) yang disediakan oleh Cendekia Aksara Press tanpa memungut biaya administrasi dari penulis.</div>
+                
+                <div class="pasal-title">Pasal 2: Platform Publikasi</div>
+                <div class="pasal-content">Karya yang lolos seleksi akan diterbitkan dan ditayangkan secara eksklusif di <b>Perpustakaan Digital Cendekia Aksara</b> (Web App/Platform resmi) yang dapat diakses oleh publik.</div>
+                
+                <div class="pasal-title">Pasal 3: Legalitas QRCBN</div>
+                <div class="pasal-content">Setiap naskah akan mendapatkan identitas unik berupa QRCBN (Quick Response Code Book Number) yang dikeluarkan oleh Cendekia Aksara sebagai tanda pencatatan internal komunitas.</div>
+                
+                <div class="pasal-title">Pasal 4: Sifat Publikasi</div>
+                <div class="pasal-content">Publikasi bersifat <i>Non-Eksklusif</i>. Penulis berhak menerbitkan kembali karyanya di penerbit lain setelah masa tayang minimal 3 bulan.</div>
+                
+                <div class="pasal-title">Pasal 5: Aksesibilitas</div>
+                <div class="pasal-content">Pembaca dapat mengakses E-Book secara gratis atau berbayar sesuai kesepakatan awal dengan penulis, namun platform ini mengutamakan semangat berbagi (Open Access).</div>
+            </div>
+
+            <div class="bab-title">BAB II: PERSYARATAN PENULIS</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 6: Kelayakan Penulis</div>
+                <div class="pasal-content">Terbuka untuk umum, baik WNI maupun WNA, tanpa batasan usia, profesi, atau latar belakang pendidikan.</div>
+                
+                <div class="pasal-title">Pasal 7: Akun Pengguna</div>
+                <div class="pasal-content">Penulis wajib memiliki akun terdaftar di Dashboard Cendekia Aksara Press dengan data diri yang valid (Nama Lengkap, No. WA, Email).</div>
+                
+                <div class="pasal-title">Pasal 8: Etika Komunikasi</div>
+                <div class="pasal-content">Penulis wajib menjunjung tinggi etika komunikasi yang sopan saat berinteraksi dengan editor atau admin Cendekia Aksara.</div>
+                
+                <div class="pasal-title">Pasal 9: Tanggung Jawab Hukum</div>
+                <div class="pasal-content">Penulis bertanggung jawab penuh secara hukum atas isi naskah yang dikirimkan. Penerbit dibebaskan dari segala tuntutan pihak ketiga.</div>
+                
+                <div class="pasal-title">Pasal 10: Satu Akun Satu Identitas</div>
+                <div class="pasal-content">Dilarang menggunakan akun palsu atau mengatasnamakan orang lain untuk mengirimkan karya.</div>
+            </div>
+
+            <div class="bab-title">BAB III: SPESIFIKASI NASKAH</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 11: Format File</div>
+                <div class="pasal-content">Naskah <b>WAJIB</b> dikirim dalam format <b>.DOC</b> atau <b>.DOCX</b> (Microsoft Word). Format PDF, TXT, atau Pages tidak akan diproses.</div>
+                
+                <div class="pasal-title">Pasal 12: Kelengkapan Naskah</div>
+                <div class="pasal-content">File naskah harus utuh dalam satu dokumen, meliputi urutan:
+                    <ol>
+                        <li>Halaman Judul</li>
+                        <li>Kata Pengantar / Prakata</li>
+                        <li>Daftar Isi (Boleh otomatis/manual)</li>
+                        <li>Isi Naskah (Bab 1 s.d. Tamat)</li>
+                        <li>Tentang Penulis (Biodata Narasi)</li>
+                    </ol>
+                </div>
+
+                <div class="pasal-title">Pasal 13: Tata Letak (Layout) Dasar</div>
+                <div class="pasal-content">Naskah diketik dengan ukuran kertas A5 (14,8 x 21 cm), Font Times New Roman 11pt/12pt, Spasi 1.15 atau 1.5, Margin rata 2 cm.</div>
+
+                <div class="pasal-title">Pasal 14: Orisinalitas</div>
+                <div class="pasal-content">Naskah harus 100% karya asli. Plagiarisme di atas 20% akan menyebabkan naskah ditolak permanen (Blacklist).</div>
+
+                <div class="pasal-title">Pasal 15: Larangan Konten</div>
+                <div class="pasal-content">Naskah dilarang mengandung unsur SARA, Pornografi eksplisit, LGBT propaganda, perjudian, atau ujaran kebencian terhadap kelompok tertentu.</div>
+            </div>
+
+            <div class="bab-title">BAB IV: FASILITAS GRATIS (INCLUDED)</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 16: Registrasi QRCBN</div>
+                <div class="pasal-content">Penerbit akan menguruskan kode unik QRCBN yang terintegrasi dengan database perpustakaan digital sekolah.</div>
+                
+                <div class="pasal-title">Pasal 17: Konversi Digital</div>
+                <div class="pasal-content">Penerbit membantu konversi file Word menjadi E-Book (PDF Terproteksi/Flipbook) yang siap baca.</div>
+                
+                <div class="pasal-title">Pasal 18: Layout Standar</div>
+                <div class="pasal-content">Penerbit memberikan perbaikan layout dasar (margin dan nomor halaman) jika format penulis sedikit berantakan. Namun, penulis disarankan sudah merapikannya sendiri.</div>
+                
+                <div class="pasal-title">Pasal 19: Sertifikat</div>
+                <div class="pasal-content">Penulis mendapatkan E-Sertifikat "Penulis Terpilih Cendekia Aksara" sebagai bukti portofolio.</div>
+                
+                <div class="pasal-title">Pasal 20: Promosi Dasar</div>
+                <div class="pasal-content">Karya akan dipromosikan 1x (satu kali) di Instagram Story Cendekia Aksara Press saat peluncuran.</div>
+            </div>
+
+            <div class="bab-title">BAB V: LAYANAN TAMBAHAN (OPSIONAL & BERBAYAR)</div>
+            <div class="pricing-alert">
+                <h4>🎨 Layanan Kreatif (Request Khusus)</h4>
+                <p style="font-size: 0.9rem; margin-bottom: 15px;">
+                    Layanan terbit dasarnya adalah <b>GRATIS</b>. Namun, jika Penulis tidak memiliki cover atau butuh ilustrasi, kami menyediakan jasa tambahan dengan tarif terjangkau:
+                </p>
+                <ul class="price-list">
+                    <li>
+                        <span><b>Desain Cover Template</b> (Pilih dari katalog, ganti teks)</span>
+                        <span class="price-tag">Rp 30.000,-</span>
+                    </li>
+                    <li>
+                        <span><b>Desain Cover Custom</b> (Request nuansa/gambar stok)</span>
+                        <span class="price-tag">Rp 50.000,-</span>
+                    </li>
+                    <li>
+                        <span><b>Ilustrasi Hitam Putih</b> (Per Gambar/Wajah)</span>
+                        <span class="price-tag">Rp 20.000,-</span>
+                    </li>
+                    <li>
+                        <span><b>Ilustrasi Berwarna</b> (Per Gambar)</span>
+                        <span class="price-tag">Rp 50.000,-</span>
+                    </li>
+                    <li>
+                        <span><b>Layout Premium</b> (Hiasan header/footer estetik)</span>
+                        <span class="price-tag">Menyesuaikan</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 21: Sifat Opsional</div>
+                <div class="pasal-content">Seluruh layanan di atas TIDAK WAJIB. Penulis boleh mengirimkan file cover sendiri (JPG High Res) secara gratis.</div>
+                
+                <div class="pasal-title">Pasal 22: Pembayaran</div>
+                <div class="pasal-content">Pembayaran layanan tambahan dilakukan di muka (transfer bank/e-wallet) sebelum proses pengerjaan dimulai.</div>
+                
+                <div class="pasal-title">Pasal 23: Revisi Desain</div>
+                <div class="pasal-content">Jatah revisi untuk layanan berbayar adalah maksimal 2x (dua kali) revisi minor. Revisi total dikenakan biaya baru.</div>
+
+                <div class="pasal-title">Pasal 24: Hak Cipta Aset</div>
+                <div class="pasal-content">Desain cover atau ilustrasi yang dipesan menjadi hak milik Penulis setelah lunas, namun Penerbit berhak memajangnya sebagai portofolio.</div>
+
+                <div class="pasal-title">Pasal 25: Pengembalian Dana</div>
+                <div class="pasal-content">Dana yang sudah ditransfer untuk jasa kreatif tidak dapat dikembalikan (Non-Refundable) jika proses pengerjaan sudah dimulai.</div>
+            </div>
+
+            <div class="bab-title">BAB VI: PROSES SELEKSI & KURASI</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 26: Waktu Tunggu</div>
+                <div class="pasal-content">Proses kurasi naskah gratis memakan waktu estimasi 30 s.d. 60 hari kerja, tergantung antrean masuk.</div>
+                
+                <div class="pasal-title">Pasal 27: Hak Tolak</div>
+                <div class="pasal-content">Redaksi berhak menolak naskah tanpa kewajiban memberikan revisi detail jika naskah dianggap tidak memenuhi standar kualitas atau melanggar norma.</div>
+                
+                <div class="pasal-title">Pasal 28: Pemberitahuan</div>
+                <div class="pasal-content">Status penerimaan atau penolakan akan dikirimkan melalui Email atau WhatsApp yang terdaftar.</div>
+                
+                <div class="pasal-title">Pasal 29: Revisi Mandiri</div>
+                <div class="pasal-content">Jika naskah diterima dengan catatan, Penulis wajib melakukan revisi mandiri dalam waktu maksimal 7 hari.</div>
+                
+                <div class="pasal-title">Pasal 30: Pembatalan Penerbitan</div>
+                <div class="pasal-content">Penerbit berhak membatalkan penerbitan secara sepihak jika Penulis tidak responsif atau tidak mengirimkan file revisi sesuai tenggat waktu.</div>
+            </div>
+
+            <div class="bab-title">BAB VII: HAK KEKAYAAN INTELEKTUAL</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 31: Kepemilikan Hak Cipta</div>
+                <div class="pasal-content">Hak Cipta naskah sepenuhnya tetap menjadi milik <b>Penulis</b>. Cendekia Aksara tidak mengambil alih hak cipta.</div>
+                
+                <div class="pasal-title">Pasal 32: Lisensi Distribusi</div>
+                <div class="pasal-content">Penulis memberikan Lisensi Distribusi Digital kepada Cendekia Aksara untuk menayangkan karya di Perpustakaan Digital selama kurun waktu yang tidak ditentukan.</div>
+                
+                <div class="pasal-title">Pasal 33: Penarikan Karya</div>
+                <div class="pasal-content">Penulis dapat menarik karya (Take Down) setelah minimal 3 bulan tayang dengan mengajukan permohonan tertulis via email.</div>
+                
+                <div class="pasal-title">Pasal 34: Perlindungan Pembajakan</div>
+                <div class="pasal-content">Penerbit berusaha melindungi karya dengan sistem *Read Only* (tidak bisa di-copy paste), namun tidak menjamin 100% keamanan dari tindakan pembajakan layar (screenshot) oleh pihak tak bertanggung jawab.</div>
+                
+                <div class="pasal-title">Pasal 35: Komersialisasi</div>
+                <div class="pasal-content">Jika di kemudian hari naskah akan dicetak fisik dan dijual, maka akan dibuatkan Perjanjian Kerjasama (PKS) terpisah untuk bagi hasil (Royalti).</div>
+            </div>
+
+            <div class="bab-title">BAB VIII: SANKSI PELANGGARAN</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 36: Sanksi Plagiarisme</div>
+                <div class="pasal-content">Penulis yang terbukti melakukan plagiat akan di-blacklist selamanya dari seluruh program Cendekia Aksara dan karyanya akan dihapus serta diumumkan secara publik sebagai sanksi moral.</div>
+                
+                <div class="pasal-title">Pasal 37: Sanksi Pemalsuan Identitas</div>
+                <div class="pasal-content">Akun yang menggunakan data palsu akan dibekukan (Banned) tanpa peringatan.</div>
+                
+                <div class="pasal-title">Pasal 38: Sanksi Etika</div>
+                <div class="pasal-content">Penulis yang melakukan ujaran kebencian atau teror kepada tim admin akan dilaporkan kepada pihak berwajib jika diperlukan.</div>
+                
+                <div class="pasal-title">Pasal 39: Penurunan Paksa</div>
+                <div class="pasal-content">Penerbit berhak menurunkan naskah sewaktu-waktu jika ditemukan pelanggaran hukum di kemudian hari.</div>
+                
+                <div class="pasal-title">Pasal 40: Ganti Rugi</div>
+                <div class="pasal-content">Penulis wajib mengganti rugi segala kerugian materiil maupun imateriil yang diderita Penerbit akibat pelanggaran hukum yang dilakukan Penulis.</div>
+            </div>
+
+            <div class="bab-title">BAB IX: KEADAAN KAHAR (FORCE MAJEURE)</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 41: Definisi</div>
+                <div class="pasal-content">Keadaan kahar meliputi bencana alam, perang, huru-hara, kegagalan sistem server global, atau kebijakan pemerintah yang menghalangi operasional penerbitan.</div>
+                
+                <div class="pasal-title">Pasal 42: Pembebasan Tanggung Jawab</div>
+                <div class="pasal-content">Dalam kondisi kahar, Penerbit dibebaskan dari kewajiban menayangkan naskah sesuai jadwal.</div>
+                
+                <div class="pasal-title">Pasal 43: Kerusakan Data</div>
+                <div class="pasal-content">Penerbit tidak bertanggung jawab atas hilangnya data naskah akibat peretasan (hack) atau kerusakan server pusat yang berada di luar kendali manajemen.</div>
+                
+                <div class="pasal-title">Pasal 44: Pemberitahuan Kahar</div>
+                <div class="pasal-content">Penerbit akan mengumumkan kondisi kahar melalui media sosial resmi sesegera mungkin.</div>
+                
+                <div class="pasal-title">Pasal 45: Penyelesaian</div>
+                <div class="pasal-content">Segala kendala akibat force majeure akan diselesaikan secara musyawarah mufakat.</div>
+            </div>
+
+            <div class="bab-title">BAB X: PENUTUP</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 46: Perubahan Syarat</div>
+                <div class="pasal-content">Cendekia Aksara Press berhak mengubah poin-poin dalam syarat dan ketentuan ini sewaktu-waktu demi perbaikan layanan.</div>
+                
+                <div class="pasal-title">Pasal 47: Keberlakuan</div>
+                <div class="pasal-content">Perubahan syarat berlaku surut atau berlaku ke depan sesuai kebijakan manajemen yang akan diinfokan kemudian.</div>
+                
+                <div class="pasal-title">Pasal 48: Domisili Hukum</div>
+                <div class="pasal-content">Kesepakatan ini tunduk pada hukum yang berlaku di Negara Kesatuan Republik Indonesia.</div>
+                
+                <div class="pasal-title">Pasal 49: Kontak Bantuan</div>
+                <div class="pasal-content">Jika ada pasal yang kurang jelas, Penulis dapat menghubungi admin via Email atau WhatsApp resmi.</div>
+                
+                <div class="pasal-title">Pasal 50: Penutup</div>
+                <div class="pasal-content">Demikian Syarat dan Ketentuan ini dibuat untuk dipatuhi bersama.</div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; color: var(--navy-dark); font-weight: 600;">
+                Terakhir Diperbarui: Januari 2026<br>
+                Tim Legal Cendekia Aksara Press
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cendekia Aksara Press. Hak Cipta Dilindungi Undang-Undang.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Pastikan User Login
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "../index.html";
+            }
+        });
+    </script>
+</body>
+</html>
