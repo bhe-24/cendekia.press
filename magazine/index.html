@@ -108,11 +108,14 @@
             margin-bottom: 15px; border-left: 5px solid #ccc;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
             display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
         }
-        .history-info h4 { font-size: 1rem; color: var(--navy-dark); margin-bottom: 5px; }
-        .history-info p { font-size: 0.8rem; color: #666; }
+        .history-card:hover { transform: translateY(-2px); }
+
+        .history-info h4 { font-size: 1rem; color: var(--navy-dark); margin-bottom: 5px; margin-top: 0; }
+        .history-info p { font-size: 0.8rem; color: #666; margin: 0; }
         .status-badge {
-            padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; white-space: nowrap; margin-left: 10px;
         }
         .st-pending { background: #fff8e1; color: #fbc02d; border: 1px solid #fbc02d; }
         .st-diterima { background: #e8f5e9; color: #388e3c; border: 1px solid #388e3c; }
@@ -211,7 +214,7 @@
                 <div class="form-group">
                     <label class="form-label">Link Naskah (Google Docs / PDF)</label>
                     <input type="url" id="inp-link" class="form-control" placeholder="https://docs.google.com/..." required>
-                    <small style="color: #666; font-size: 0.8rem;">*Pastikan akses link disetting "Anyone with the link" (Siapa saja yang memiliki link).</small>
+                    <small style="color: #666; font-size: 0.8rem;">*Pastikan akses link disetting "Anyone with the link".</small>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Biodata Narasi Lengkap</label>
@@ -230,7 +233,7 @@
 
         <h2 class="section-title">Riwayat Kiriman Saya</h2>
         <div id="history-container">
-            <p style="text-align: center; color: #999;">Memuat data...</p>
+            <p style="text-align: center; color: #999; padding: 20px;">Memuat data...</p>
         </div>
 
     </main>
@@ -267,38 +270,48 @@
                 document.getElementById('inp-email').value = user.email;
                 if(user.displayName) document.getElementById('inp-nama').value = user.displayName;
                 
-                // Load Riwayat
-                loadMagazineHistory(user.uid);
+                // LOAD RIWAYAT (DENGAN TEKNIK CLIENT-SIDE SORTING)
+                loadMagazineHistorySafe(user.uid);
             } else {
                 window.location.href = "../../index.html"; // Balik ke Login
             }
         });
 
-        // 2. LOAD RIWAYAT (REALTIME)
-        function loadMagazineHistory(uid) {
+        // 2. LOAD RIWAYAT (SAFE MODE)
+        function loadMagazineHistorySafe(uid) {
             const container = document.getElementById('history-container');
             
-            // Query ke koleksi 'magazine_submissions'
+            // Query hanya UID (Tanpa orderBy server-side agar tidak error index)
             const q = query(
                 collection(db, "magazine_submissions"), 
-                where("uid", "==", uid), 
-                orderBy("timestamp", "desc")
+                where("uid", "==", uid)
             );
 
             onSnapshot(q, (snapshot) => {
                 container.innerHTML = "";
                 if (snapshot.empty) {
-                    container.innerHTML = "<p style='text-align:center; color:#999; padding:20px;'>Belum ada karya yang dikirim.</p>";
+                    container.innerHTML = "<p style='text-align:center; color:#999; padding:20px; border:1px dashed #ccc; border-radius:10px;'>Belum ada karya yang dikirim.</p>";
                     return;
                 }
 
+                // Masukkan data ke array
+                let items = [];
                 snapshot.forEach((doc) => {
-                    const data = doc.data();
-                    
+                    let data = doc.data();
+                    // Buat properti sortTime untuk pengurutan manual
+                    data.sortTime = data.timestamp ? data.timestamp.toMillis() : Date.now();
+                    items.push(data);
+                });
+
+                // URUTKAN MANUAL (Terbaru di atas)
+                items.sort((a, b) => b.sortTime - a.sortTime);
+
+                // Render HTML
+                items.forEach((data) => {
                     // Format Tanggal
                     let dateStr = "Baru saja";
                     if(data.timestamp) dateStr = data.timestamp.toDate().toLocaleDateString("id-ID", {
-                        day: 'numeric', month: 'short', year: 'numeric'
+                        day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit'
                     });
 
                     // Badge Status
@@ -309,13 +322,16 @@
                     const card = `
                     <div class="history-card">
                         <div class="history-info">
-                            <h4>${data.judul} <span style="font-size:0.8rem; color:#aaa;">(${data.kategori})</span></h4>
+                            <h4>${data.judul} <span style="font-size:0.8rem; color:#aaa; font-weight:400;">(${data.kategori})</span></h4>
                             <p>Dikirim: ${dateStr} • Pena: ${data.nama_pena}</p>
                         </div>
                         <div class="status-badge ${badgeClass}">${data.status}</div>
                     </div>`;
                     container.innerHTML += card;
                 });
+            }, (error) => {
+                console.error("Error History:", error);
+                container.innerHTML = `<p style="color:red; text-align:center;">Gagal memuat: ${error.message}</p>`;
             });
         }
 
@@ -347,10 +363,11 @@
                 await addDoc(collection(db, "magazine_submissions"), formData);
 
                 showToast("Berhasil! Karya sudah masuk ke meja redaksi.");
+                
+                // Reset Form
                 document.getElementById('magazine-form').reset();
-                // Reset manual field readonly
                 document.getElementById('inp-email').value = currentUser.email;
-                document.getElementById('inp-nama').value = currentUser.displayName;
+                document.getElementById('inp-nama').value = currentUser.displayName || "";
 
             } catch (error) {
                 console.error("Error:", error);
