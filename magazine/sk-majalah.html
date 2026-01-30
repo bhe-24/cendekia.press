@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S&K Majalah - Cendekia Aksara</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
+            --white: #ffffff;
+            --gray: #666666;
+            --light-bg: #fff0f5; /* Background agak pink sangat muda (Magazine Vibe) */
+            --magenta: #e91e63;   /* Warna Utama Majalah */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: var(--light-bg); 
+            min-height: 100vh; 
+            display: flex; flex-direction: column; 
+        }
+
+        /* --- HEADER (Konsisten) --- */
+        header {
+            background-color: var(--navy-dark);
+            padding: 10px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-logo-wrapper {
+            width: 45px; height: 45px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--mustard);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header-logo { width: 60%; height: auto; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+
+        /* Tombol Kembali */
+        .btn-back {
+            color: var(--mustard); text-decoration: none; font-weight: 600;
+            font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
+            border: 1px solid var(--mustard); padding: 5px 15px; border-radius: 20px;
+            transition: 0.3s;
+        }
+        .btn-back:hover { background: var(--mustard); color: var(--navy-dark); }
+
+        /* --- MAIN CONTENT --- */
+        main { flex: 1; padding: 30px 20px; max-width: 900px; margin: 0 auto; width: 100%; }
+
+        .doc-header { text-align: center; margin-bottom: 40px; }
+        .doc-header h1 { font-size: 1.8rem; color: var(--navy-dark); margin-bottom: 10px; }
+        .doc-header p { color: var(--gray); font-size: 0.9rem; }
+        
+        /* Info Box */
+        .info-box {
+            background: var(--white);
+            border-left: 5px solid var(--magenta);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .info-box h3 { color: var(--navy-dark); margin-bottom: 10px; font-size: 1.1rem; }
+        .info-box p { font-size: 0.9rem; color: #555; line-height: 1.6; }
+
+        /* Pasal Styling */
+        .legal-section {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        .bab-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            background: var(--magenta); /* Aksen Magenta */
+            padding: 10px 15px;
+            border-radius: 5px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .pasal-group { margin-bottom: 20px; border-bottom: 1px dashed #eee; padding-bottom: 15px; }
+        .pasal-group:last-child { border-bottom: none; }
+        
+        .pasal-title { font-weight: 700; font-size: 0.95rem; color: var(--navy-light); margin-bottom: 5px; }
+        .pasal-content { font-size: 0.9rem; color: #444; line-height: 1.6; padding-left: 0; margin-bottom: 10px; text-align: justify; }
+        .pasal-content ul { padding-left: 20px; margin-top: 5px; }
+
+        /* --- FOOTER --- */
+        footer { 
+            background-color: var(--navy-dark); color: var(--white); 
+            padding: 20px; font-size: 0.75rem; text-align: center; margin-top: auto; 
+        }
+
+        @media (max-width: 768px) {
+            .legal-section { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logo-wrapper">
+                <img src="https://i.imgur.com/5Srjyo4.png" alt="Logo" class="header-logo">
+            </div>
+            <div class="header-title">S&K MAJALAH</div>
+        </div>
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
+    </header>
+
+    <main>
+        <div class="doc-header">
+            <h1>Pedoman Kontributor Majalah</h1>
+            <p>Standar Kurasi & Kebijakan Redaksi Cendekia</p>
+        </div>
+
+        <div class="info-box">
+            <h3>🏢 Tentang Cendekia Aksara vs Cendekia Press</h3>
+            <p>
+                <b>Cendekia Aksara</b> adalah komunitas/sekolah menulis tempat kita belajar bersama. <br>
+                <b>Cendekia Press</b> (dan Majalah Cendekia) adalah badan penerbitan yang mengurusi publikasi karya. <br><br>
+                Karya yang Anda kirimkan di sini akan dikelola oleh Redaksi Majalah Cendekia Press untuk diterbitkan dalam E-Magazine bulanan atau Antologi Web.
+            </p>
+        </div>
+
+        <div class="legal-section">
+            
+            <div class="bab-title">BAB I: KETENTUAN UMUM KARYA</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 1: Orisinalitas Mutlak</div>
+                <div class="pasal-content">Karya yang dikirimkan wajib 100% asli buatan sendiri, bukan saduran, bukan terjemahan, dan bebas dari plagiarisme.</div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 2: Status Karya</div>
+                <div class="pasal-content">Karya belum pernah dipublikasikan di media cetak nasional atau berstatus sedang dikutsertakan dalam lomba lain. (Karya yang pernah diposting di blog pribadi/Wattpad diperbolehkan dengan catatan).</div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 3: Norma & Etika</div>
+                <div class="pasal-content">Karya tidak boleh mengandung unsur SARA (Suku, Agama, Ras, Antargolongan) yang memecah belah, pornografi, LGBT, atau ujaran kebencian.</div>
+            </div>
+
+            <div class="bab-title">BAB II: KETENTUAN KHUSUS CERPEN (CERITA PENDEK)</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 4: Panjang Naskah</div>
+                <div class="pasal-content">Panjang naskah cerpen berkisar antara <b>700 s.d. 2.000 kata</b>. Diketik rapi di Microsoft Word, A4, Times New Roman 12, Spasi 1.5.</div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 5: Tema & Genre</div>
+                <div class="pasal-content">Bebas (Romance, Horor, Fantasi, Slice of Life) kecuali jika ada <i>Event Tema Bulanan</i> khusus yang diumumkan di Instagram.</div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 6: Struktur Cerita</div>
+                <div class="pasal-content">Cerpen harus memiliki konflik yang jelas, penyelesaian (ending) yang tuntas, dan tidak bersambung (One Shot).</div>
+            </div>
+
+            <div class="bab-title">BAB III: KETENTUAN KHUSUS PUISI</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 7: Jumlah Kiriman</div>
+                <div class="pasal-content">Penulis wajib mengirimkan minimal <b>3 (tiga) judul puisi</b> dan maksimal 5 (lima) judul dalam satu file dokumen.</div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 8: Gaya Bahasa</div>
+                <div class="pasal-content">Bebas menggunakan majas dan diksi, namun tetap memperhatikan kaidah keindahan bahasa. Puisi eksperimental diperbolehkan.</div>
+            </div>
+
+            <div class="bab-title">BAB IV: KETENTUAN KHUSUS ESAI & RESENSI</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 9: Esai / Opini</div>
+                <div class="pasal-content">
+                    <ul>
+                        <li>Panjang naskah 500 s.d. 1.000 kata.</li>
+                        <li>Topik seputar: Literasi, Pendidikan, Budaya Pop, atau Isu Sosial Terkini.</li>
+                        <li>Wajib menyertakan data/fakta pendukung jika bersifat argumentatif.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 10: Resensi Buku</div>
+                <div class="pasal-content">
+                    <ul>
+                        <li>Buku yang diresensi maksimal terbitan 2 tahun terakhir.</li>
+                        <li>Wajib menyertakan cover buku (gambar) di dalam file.</li>
+                        <li>Mencantumkan identitas buku (Judul, Penulis, Penerbit, Tahun Terbit, Tebal Halaman, ISBN).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bab-title">BAB V: HAK & KEWAJIBAN</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 11: Hak Cipta</div>
+                <div class="pasal-content">Hak Cipta sepenuhnya tetap milik Penulis. Cendekia Aksara hanya memegang <b>Hak Terbit Pertama</b> (First Serial Rights).</div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 12: Honorarium</div>
+                <div class="pasal-content">Saat ini Majalah Cendekia bersifat <i>Voluntary</i> (Sukarela). Belum ada honor berupa uang tunai. Kontributor terpilih akan mendapatkan E-Sertifikat Kontributor dan promosi profil di media sosial kami.</div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 13: Masa Tunggu</div>
+                <div class="pasal-content">Jika dalam waktu <b>1 Bulan</b> tidak ada kabar dari redaksi, maka naskah otomatis dinyatakan <b>TIDAK LOLOS</b> dan penulis berhak mengirimkannya ke media lain.</div>
+            </div>
+
+            <div class="bab-title">BAB VI: PENUTUP</div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 14: Keputusan Redaksi</div>
+                <div class="pasal-content">Keputusan tim redaksi dalam memilih karya bersifat mutlak dan tidak dapat diganggu gugat.</div>
+            </div>
+            <div class="pasal-group">
+                <div class="pasal-title">Pasal 15: Revisi Naskah</div>
+                <div class="pasal-content">Redaksi berhak menyunting naskah (judul, paragraf, ejaan) tanpa mengubah substansi/makna tulisan agar sesuai dengan gaya selingkung majalah.</div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cendekia Aksara Press. <a href="../privacy.html" style="color:var(--mustard);">Kebijakan Privasi</a></p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // Opsional: Redirect jika ingin halaman ini private
+                // window.location.href = "../../index.html";
+            }
+        });
+    </script>
+</body>
+</html>
