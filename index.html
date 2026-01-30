@@ -9,243 +9,137 @@
 
     <style>
         :root {
-            --navy-dark: #0a192f;   /* Warna Dasar Gelap */
-            --navy-light: #172a45;  /* Warna Aksen Geometri */
-            --mustard: #ffc107;     /* Warna Utama Cendekia */
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
             --mustard-hover: #e0a800;
             --white: #ffffff;
             --gray: #8892b0;
+            --danger: #ff4444;
+            --success: #00C851;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         body {
             background-color: var(--navy-dark);
             height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            position: relative;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden; position: relative;
         }
 
-        /* --- Geometric Background (Nuansa Perusahaan) --- */
-        .geometric-bg {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .shape {
-            position: absolute;
-            background: linear-gradient(45deg, var(--navy-light), transparent);
-            border-radius: 20px;
-            opacity: 0.5;
-        }
-
+        /* --- 1. GEOMETRIC BACKGROUND --- */
+        .geometric-bg { position: absolute; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+        .shape { position: absolute; background: linear-gradient(45deg, var(--navy-light), transparent); border-radius: 20px; opacity: 0.5; }
         .shape-1 { width: 400px; height: 400px; top: -100px; left: -100px; transform: rotate(45deg); border: 2px solid var(--mustard); }
         .shape-2 { width: 300px; height: 300px; bottom: -50px; right: -50px; transform: rotate(15deg); background: var(--navy-light); }
         .shape-3 { width: 150px; height: 150px; top: 40%; left: 20%; border-radius: 50%; border: 1px solid rgba(255, 193, 7, 0.2); }
 
-        /* --- Container Utama --- */
+        /* --- 2. CONTAINER --- */
         .container {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 400px; /* Default Mobile */
-            padding: 20px;
+            position: relative; z-index: 10; width: 100%; max-width: 400px; padding: 20px;
         }
 
-        /* --- Branding Header --- */
-        .brand-header {
-            text-align: center;
-            margin-bottom: 25px;
-            color: var(--white);
+        /* --- 3. LOGO BARU (SWEET DESIGN) --- */
+        .brand-header { text-align: center; margin-bottom: 25px; color: var(--white); }
+        
+        .logo-wrapper {
+            width: 100px; height: 100px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            margin: 0 auto 15px auto;
+            border: 3px solid var(--mustard);
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.3); /* Efek Glow Emas */
+            animation: float 6s ease-in-out infinite;
         }
 
-        .logo {
-            width: 80px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.3));
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
-        .brand-header h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--mustard);
-            letter-spacing: 1px;
-        }
+        .logo { width: 60%; height: auto; object-fit: contain; }
 
-        .brand-header p {
-            font-size: 0.8rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        .brand-header h2 { font-size: 1.5rem; font-weight: 700; color: var(--mustard); letter-spacing: 1px; }
+        .brand-header p { font-size: 0.8rem; color: var(--gray); text-transform: uppercase; letter-spacing: 2px; }
 
-        /* --- Form Box Style --- */
+        /* --- 4. FORM STYLE --- */
         .form-box {
-            background: rgba(23, 42, 69, 0.95); /* Glassmorphism effect */
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(23, 42, 69, 0.95);
+            backdrop-filter: blur(10px); padding: 30px;
+            border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            display: none; /* Disembunyikan dulu */
-            animation: fadeIn 0.5s ease;
+            display: none; animation: fadeIn 0.5s ease;
         }
+        .form-box.active { display: block; }
+        .form-box h3 { color: var(--white); margin-bottom: 20px; font-weight: 600; text-align: center; }
+        .form-box .desc { color: var(--gray); font-size: 0.85rem; text-align: center; margin-bottom: 20px; }
 
-        .form-box.active {
-            display: block; /* Munculkan yang aktif */
-        }
-
-        .form-box h3 {
-            color: var(--white);
-            margin-bottom: 20px;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .form-box .desc {
-            color: var(--gray);
-            font-size: 0.85rem;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        /* --- Inputs --- */
-        .input-group {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--mustard);
-            font-size: 0.9rem;
-        }
-
-        .input-group .toggle-password {
-            left: auto;
-            right: 15px;
-            cursor: pointer;
-            color: var(--gray);
-        }
-
+        /* Inputs */
+        .input-group { position: relative; margin-bottom: 15px; }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--mustard); }
+        .input-group .toggle-password { left: auto; right: 15px; cursor: pointer; color: var(--gray); }
         .input-group input {
-            width: 100%;
-            padding: 12px 40px;
-            background: var(--navy-dark);
-            border: 1px solid #233554;
-            border-radius: 8px;
-            color: var(--white);
-            font-size: 0.9rem;
-            outline: none;
-            transition: 0.3s;
+            width: 100%; padding: 12px 40px; background: var(--navy-dark);
+            border: 1px solid #233554; border-radius: 8px; color: var(--white);
+            font-size: 0.9rem; outline: none; transition: 0.3s;
         }
+        .input-group input:focus { border-color: var(--mustard); box-shadow: 0 0 5px rgba(255, 193, 7, 0.3); }
 
-        .input-group input:focus {
-            border-color: var(--mustard);
-            box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
-        }
-
-        /* --- Buttons & Links --- */
-        .actions {
-            text-align: right;
-            margin-bottom: 20px;
-        }
-
-        .actions a, .switch-text a {
-            color: var(--mustard);
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .actions a:hover, .switch-text a:hover {
-            text-decoration: underline;
-        }
-
+        /* Buttons */
+        .actions { text-align: right; margin-bottom: 20px; }
+        .actions a, .switch-text a { color: var(--mustard); text-decoration: none; font-size: 0.85rem; font-weight: 600; }
+        .actions a:hover, .switch-text a:hover { text-decoration: underline; }
         .btn-primary {
-            width: 100%;
-            padding: 12px;
-            background: var(--mustard);
-            border: none;
-            border-radius: 8px;
-            color: var(--navy-dark);
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            width: 100%; padding: 12px; background: var(--mustard); border: none;
+            border-radius: 8px; color: var(--navy-dark); font-weight: 700;
+            font-size: 1rem; cursor: pointer; transition: 0.3s;
+            text-transform: uppercase; letter-spacing: 1px;
         }
+        .btn-primary:hover { background: var(--mustard-hover); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3); }
+        .switch-text { text-align: center; margin-top: 20px; color: var(--gray); font-size: 0.85rem; }
 
-        .btn-primary:hover {
-            background: var(--mustard-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+        /* --- 5. CUSTOM NOTIFICATION (POP UP) --- */
+        #notification-area {
+            position: fixed; top: 20px; right: 20px; z-index: 9999;
+            display: flex; flex-direction: column; gap: 10px;
         }
-
-        .switch-text {
-            text-align: center;
-            margin-top: 20px;
-            color: var(--gray);
-            font-size: 0.85rem;
+        .toast {
+            min-width: 300px; padding: 15px 20px; border-radius: 8px;
+            background: var(--white); color: var(--navy-dark);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            display: flex; align-items: center; gap: 15px;
+            transform: translateX(120%); transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            border-left: 5px solid var(--navy-dark);
         }
+        .toast.show { transform: translateX(0); }
+        .toast.success { border-left-color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast i { font-size: 1.2rem; }
+        .toast.success i { color: var(--success); }
+        .toast.error i { color: var(--danger); }
+        .toast-content { display: flex; flex-direction: column; }
+        .toast-title { font-weight: 700; font-size: 0.9rem; }
+        .toast-msg { font-size: 0.8rem; color: #555; }
 
-        /* --- Animation --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- Responsive Laptop/Desktop --- */
+        /* Responsive */
         @media (min-width: 1024px) {
-            .container {
-                max-width: 900px;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 50px;
-            }
-            
-            .brand-header {
-                text-align: left;
-                flex: 1;
-            }
-            
-            .brand-header h2 {
-                font-size: 2.5rem;
-                line-height: 1.2;
-            }
-            
-            .brand-header p {
-                font-size: 1.1rem;
-            }
-            
-            .logo {
-                width: 120px;
-            }
-
-            .form-box {
-                flex: 1;
-                max-width: 400px;
-            }
+            .container { max-width: 900px; display: flex; align-items: center; justify-content: space-between; gap: 50px; }
+            .brand-header { text-align: left; flex: 1; }
+            .logo-wrapper { margin: 0 0 20px 0; } /* Align left on desktop */
+            .brand-header h2 { font-size: 2.5rem; line-height: 1.2; }
+            .brand-header p { font-size: 1.1rem; }
+            .form-box { flex: 1; max-width: 400px; }
         }
     </style>
 </head>
 <body>
+
+    <div id="notification-area"></div>
 
     <div class="geometric-bg">
         <div class="shape shape-1"></div>
@@ -255,7 +149,9 @@
 
     <div class="container">
         <div class="brand-header">
-            <img src="https://imgur.com/5Srjyo4.png" alt="Logo CA Press" class="logo">
+            <div class="logo-wrapper">
+                <img src="https://i.imgur.com/5Srjyo4.png" alt="Logo CA Press" class="logo">
+            </div>
             <h2>Cendekia Aksara Press</h2>
             <p>Platform Penerbitan & Literasi Digital</p>
         </div>
@@ -307,12 +203,8 @@
 
         <div id="forgot-box" class="form-box">
             <h3>Reset Kata Sandi</h3>
-            <p class="desc">Masukkan email Anda, kami akan mengirimkan tautan pemulihan.</p>
+            <p class="desc">Masukkan email Anda. Kami akan kirimkan link ajaib untuk reset password.</p>
             <form id="form-forgot">
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="forgot-name" placeholder="Nama Lengkap (Konfirmasi)" required>
-                </div>
                 <div class="input-group">
                     <i class="fas fa-envelope"></i>
                     <input type="email" id="forgot-email" placeholder="Email Terdaftar" required>
@@ -324,7 +216,6 @@
     </div>
 
     <script type="module">
-        // Import fungsi Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { 
             getAuth, 
@@ -334,7 +225,7 @@
             updateProfile 
         } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        // Konfigurasi Firebase Anda
+        // Konfigurasi Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
             authDomain: "cendekia-press.firebaseapp.com",
@@ -344,11 +235,41 @@
             appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
 
-        // --- UI FUNCTION (GANTI HALAMAN) ---
+        // --- CUSTOM NOTIFICATION FUNCTION ---
+        function showNotification(title, message, type) {
+            const area = document.getElementById('notification-area');
+            const toast = document.createElement('div');
+            
+            // Tentukan Icon
+            let iconClass = 'fa-info-circle';
+            if(type === 'success') iconClass = 'fa-check-circle';
+            if(type === 'error') iconClass = 'fa-exclamation-circle';
+
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas ${iconClass}"></i>
+                <div class="toast-content">
+                    <span class="toast-title">${title}</span>
+                    <span class="toast-msg">${message}</span>
+                </div>
+            `;
+            
+            area.appendChild(toast);
+            
+            // Animasi Masuk
+            setTimeout(() => { toast.classList.add('show'); }, 100);
+
+            // Hilang Otomatis setelah 3 detik
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => { toast.remove(); }, 500); // Hapus elemen
+            }, 3500);
+        }
+
+        // --- UI UTILS ---
         window.showPage = function(pageId) {
             document.querySelectorAll('.form-box').forEach(el => el.classList.remove('active'));
             document.getElementById(pageId + '-box').classList.add('active');
@@ -368,7 +289,7 @@
             }
         }
 
-        // --- 1. LOGIKA REGISTER / DAFTAR ---
+        // --- REGISTER ---
         const registerForm = document.getElementById('form-register');
         registerForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -384,24 +305,28 @@
                 .then((userCredential) => {
                     const user = userCredential.user;
                     updateProfile(user, { displayName: name }).then(() => {
-                        alert(`Selamat Datang, ${name}! Akun berhasil dibuat.`);
+                        showNotification("Berhasil!", `Selamat bergabung, ${name}!`, "success");
                         
-                        // CEK REDIRECT SETELAH DAFTAR (Auto Login)
-                        if(email.endsWith('@ac.id')) {
-                            window.location.href = "portal_admin/index.html";
-                        } else {
-                            window.location.href = "dashboard/index.html"; 
-                        }
+                        setTimeout(() => {
+                            if(email.endsWith('@ac.id')) {
+                                window.location.href = "portal_admin/index.html";
+                            } else {
+                                window.location.href = "dashboard/index.html"; 
+                            }
+                        }, 2000);
                     });
                 })
                 .catch((error) => {
                     btn.innerText = "DAFTAR AKUN";
                     btn.disabled = false;
-                    alert("Gagal Daftar: " + error.message);
+                    let msg = error.message;
+                    if(error.code === 'auth/email-already-in-use') msg = "Email sudah terpakai.";
+                    if(error.code === 'auth/weak-password') msg = "Password minimal 6 karakter.";
+                    showNotification("Gagal Daftar", msg, "error");
                 });
         });
 
-        // --- 2. LOGIKA LOGIN (DENGAN PEMISAHAN ADMIN) ---
+        // --- LOGIN ---
         const loginForm = document.getElementById('form-login');
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -414,26 +339,25 @@
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    console.log("Login sukses:", user.email);
+                    showNotification("Login Sukses", "Mengarahkan ke dashboard...", "success");
 
-                    // LOGIKA REDIRECT ADMIN vs USER BIASA
-                    // Jika email berakhiran @ac.id -> Masuk Portal Admin
-                    if (user.email.endsWith('@ac.id')) {
-                        alert("Halo Admin! Mengarahkan ke Portal Pengelola...");
-                        window.location.href = "portal_admin/index.html";
-                    } 
-                    // Jika email biasa (gmail, yahoo, dll) -> Masuk Dashboard User
-                    else {
-                        window.location.href = "dashboard/index.html";
-                    }
+                    setTimeout(() => {
+                        if (user.email.endsWith('@ac.id')) {
+                            window.location.href = "portal_admin/index.html";
+                        } else {
+                            window.location.href = "dashboard/index.html";
+                        }
+                    }, 1500); // Delay sedikit biar notif terbaca
                 })
                 .catch((error) => {
                     btn.innerText = "MASUK SEKARANG";
-                    alert("Login Gagal: Email atau Password Salah.");
+                    let msg = "Email atau Password Salah.";
+                    if(error.code === 'auth/too-many-requests') msg = "Terlalu banyak gagal login. Coba lagi nanti.";
+                    showNotification("Akses Ditolak", msg, "error");
                 });
         });
 
-        // --- 3. LOGIKA LUPA PASSWORD ---
+        // --- FORGOT PASSWORD ---
         const forgotForm = document.getElementById('form-forgot');
         forgotForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -444,13 +368,15 @@
 
             sendPasswordResetEmail(auth, email)
                 .then(() => {
-                    alert(`Link reset password telah dikirim ke ${email}.\nCek Inbox atau SPAM.`);
+                    showNotification("Email Terkirim!", "Cek Inbox/Spam untuk reset password.", "success");
                     btn.innerText = "KIRIM LINK RESET";
-                    showPage('login');
+                    setTimeout(() => { showPage('login'); }, 3000);
                 })
                 .catch((error) => {
                     btn.innerText = "KIRIM LINK RESET";
-                    alert("Error: " + error.message);
+                    let msg = error.message;
+                    if(error.code === 'auth/user-not-found') msg = "Email tidak terdaftar.";
+                    showNotification("Gagal Kirim", msg, "error");
                 });
         });
     </script>
