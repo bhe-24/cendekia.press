@@ -13,8 +13,8 @@
             --navy-light: #172a45;
             --mustard: #ffc107;
             --white: #ffffff;
-            --light-bg: #fff0f5; /* Background Pink Muda */
-            --magenta: #e91e63;   /* Warna Utama Majalah */
+            --light-bg: #fff0f5;
+            --magenta: #e91e63;
             --magenta-dark: #c2185b;
         }
 
@@ -24,19 +24,15 @@
 
         /* --- HEADER --- */
         header {
-            background-color: var(--navy-dark);
-            padding: 15px 20px;
+            background-color: var(--navy-dark); padding: 15px 20px;
             display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 100;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: sticky; top: 0; z-index: 100; box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .header-left { display: flex; align-items: center; gap: 12px; }
         .header-logo-wrapper {
-            width: 40px; height: 40px;
-            background: var(--white);
-            border-radius: 50%;
-            border: 2px solid var(--mustard);
+            width: 40px; height: 40px; background: var(--white);
+            border-radius: 50%; border: 2px solid var(--mustard);
             display: flex; justify-content: center; align-items: center;
         }
         .header-logo { width: 60%; height: auto; }
@@ -72,7 +68,6 @@
         .search-box input:focus { border-color: var(--magenta); box-shadow: 0 0 5px rgba(233, 30, 99, 0.2); }
         .search-box i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #aaa; }
 
-        /* Auto Delete Notice */
         .auto-delete-notice {
             background: #fce4ec; color: #880e4f; font-size: 0.8rem; padding: 10px;
             border-radius: 8px; margin-bottom: 20px; border: 1px solid #f8bbd0;
@@ -106,6 +101,17 @@
         .card-author { font-size: 0.9rem; color: #555; margin-bottom: 15px; }
         .card-author i { color: var(--magenta); width: 20px; text-align: center; }
 
+        /* Preview Snippet */
+        .naskah-snippet {
+            background: #f9f9f9; padding: 10px; border-radius: 5px; border: 1px dashed #ddd;
+            font-size: 0.85rem; color: #666; font-style: italic;
+            margin-bottom: 15px; max-height: 60px; overflow: hidden; position: relative;
+        }
+        .naskah-snippet::after {
+            content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 20px;
+            background: linear-gradient(transparent, #f9f9f9);
+        }
+
         .card-actions {
             display: flex; gap: 10px; margin-top: 15px; border-top: 1px dashed #eee; padding-top: 15px; flex-wrap: wrap;
         }
@@ -116,18 +122,44 @@
         }
         .btn-copy { background: var(--navy-dark); color: white; flex: 1; justify-content: center; }
         .btn-copy:hover { background: var(--navy-light); }
-        .btn-link { background: var(--white); border: 1px solid var(--magenta); color: var(--magenta); }
-        .btn-link:hover { background: var(--magenta); color: white; }
+        .btn-view { background: var(--white); border: 1px solid var(--magenta); color: var(--magenta); }
+        .btn-view:hover { background: var(--magenta); color: white; }
         .btn-delete { background: #ffebee; color: #c62828; }
 
-        /* Dropdown Status */
+        /* Status Select */
         .status-select {
             padding: 8px; border-radius: 6px; border: 1px solid #ddd; 
             font-size: 0.8rem; outline: none; cursor: pointer;
         }
 
-        /* Notifikasi Copy */
-        #notification-area { position: fixed; top: 20px; right: 20px; z-index: 9999; }
+        /* --- MODAL BACA NASKAH --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 1000;
+            display: none; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-box {
+            background: white; width: 100%; max-width: 800px; height: 90%;
+            border-radius: 12px; display: flex; flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden;
+        }
+        .modal-header {
+            padding: 15px 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;
+            background: var(--navy-dark); color: white;
+        }
+        .modal-body {
+            padding: 30px; overflow-y: auto; flex: 1; font-family: 'Times New Roman', serif; font-size: 1.1rem; line-height: 1.8;
+        }
+        .modal-close { cursor: pointer; font-size: 1.5rem; color: #ccc; transition:0.3s; }
+        .modal-close:hover { color: white; }
+
+        /* Loader & Toast */
+        #loader-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.9); z-index: 9999;
+            display: flex; justify-content: center; align-items: center; flex-direction: column; color: var(--magenta);
+        }
+        #notification-area { position: fixed; top: 20px; right: 20px; z-index: 10001; }
         .toast {
             background: var(--white); color: var(--navy-dark); padding: 15px;
             border-radius: 8px; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -136,16 +168,8 @@
         .toast.show { display: block; animation: slideIn 0.3s; }
         @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
 
-        /* Loader */
-        #loader-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255,255,255,0.9); z-index: 9999;
-            display: flex; justify-content: center; align-items: center; flex-direction: column;
-        }
-
         @media (max-width: 600px) {
             .tools-bar { flex-direction: column; align-items: stretch; }
-            .search-box { width: 100%; }
             .card-actions { flex-direction: column; }
         }
     </style>
@@ -153,8 +177,8 @@
 <body>
 
     <div id="loader-overlay">
-        <i class="fas fa-circle-notch fa-spin fa-2x" style="color:var(--magenta)"></i>
-        <p style="margin-top:10px; color:#555;">Memuat Redaksi...</p>
+        <i class="fas fa-circle-notch fa-spin fa-2x"></i>
+        <p style="margin-top:10px; color:#555;">Sinkronisasi Redaksi...</p>
     </div>
     <div id="notification-area"></div>
 
@@ -174,7 +198,7 @@
         <div class="tools-bar">
             <div class="date-info">
                 <h2 id="current-month-year">...</h2>
-                <p>Naskah Masuk (Cerpen, Puisi, Esai)</p>
+                <p>Naskah Langsung (Bukan Link)</p>
             </div>
             <div class="search-box">
                 <i class="fas fa-search"></i>
@@ -184,12 +208,25 @@
 
         <div class="auto-delete-notice">
             <i class="fas fa-trash-restore"></i>
-            <span>Pembersihan Otomatis: Naskah > 60 hari akan dihapus permanen.</span>
+            <span>Auto-Clean: Naskah > 60 hari akan dihapus otomatis.</span>
         </div>
 
         <div class="submission-list" id="list-container">
             </div>
     </main>
+
+    <div id="readModal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3 id="modal-title" style="margin:0; font-size:1.1rem;">Baca Naskah</h3>
+                <i class="fas fa-times modal-close" onclick="closeModal()"></i>
+            </div>
+            <div id="modal-content" class="modal-body">
+                </div>
+        </div>
+    </div>
+
+    <div id="copy-helper" style="position: absolute; left: -9999px;"></div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
@@ -231,7 +268,7 @@
             sixtyDaysAgo.setDate(sixtyDaysAgo.getDate() - 60);
 
             try {
-                // Ambil dari koleksi 'magazine_submissions'
+                // Gunakan orderBy Timestamp agar urut terbaru
                 const q = query(collection(db, "magazine_submissions"), orderBy("timestamp", "desc"));
                 const querySnapshot = await getDocs(q);
 
@@ -244,9 +281,10 @@
                     
                     // Auto Delete Logic
                     if (docDate < sixtyDaysAgo) {
-                        console.log(`Menghapus naskah majalah lama: ${data.judul}`);
                         promises.push(deleteDoc(doc(db, "magazine_submissions", docSnap.id)));
                     } else {
+                        // Pastikan isi_naskah ada, kalau tidak ambil link (legacy support)
+                        data.finalContent = data.isi_naskah || `<p>Naskah ini berupa link: <a href="${data.link_naskah}">${data.link_naskah}</a></p>`;
                         allData.push({ id: docSnap.id, ...data, dateObj: docDate });
                     }
                 });
@@ -257,7 +295,7 @@
 
             } catch (error) {
                 console.error(error);
-                alert("Gagal memuat data majalah.");
+                alert("Gagal memuat data.");
             }
         }
 
@@ -267,11 +305,11 @@
             container.innerHTML = "";
 
             if (dataArray.length === 0) {
-                container.innerHTML = "<p style='text-align:center; color:#999; padding:30px;'>Belum ada naskah majalah masuk bulan ini.</p>";
+                container.innerHTML = "<p style='text-align:center; color:#999; padding:30px;'>Belum ada naskah masuk.</p>";
                 return;
             }
 
-            dataArray.forEach(item => {
+            dataArray.forEach((item, index) => {
                 const dateStr = item.dateObj.toLocaleDateString("id-ID", {
                     day: 'numeric', month: 'short', hour: '2-digit', minute:'2-digit'
                 });
@@ -280,18 +318,11 @@
                 if(item.status === "Diterima") statusClass = "st-diterima";
                 if(item.status === "Ditolak") statusClass = "st-ditolak";
                 
-                // Siapkan data untuk dicopy (Escape quote biar ga error)
-                const copyContent = `
-JUDUL: ${item.judul}
-PENULIS: ${item.nama_pena} (${item.nama_asli})
-KATEGORI: ${item.kategori}
-WA: ${item.wa}
-
-LINK NASKAH: ${item.link_naskah}
-
-BIODATA:
-${item.biodata}
-`.replace(/"/g, '&quot;');
+                // Ambil 50 karakter pertama untuk preview (hilangkan tag HTML)
+                const tempDiv = document.createElement("div");
+                tempDiv.innerHTML = item.finalContent;
+                const plainText = tempDiv.textContent || tempDiv.innerText || "";
+                const snippet = plainText.substring(0, 100) + "...";
 
                 const card = document.createElement('div');
                 card.className = `mag-card ${statusClass}`;
@@ -305,21 +336,23 @@ ${item.biodata}
                     
                     <div class="card-author">
                         <div><i class="fas fa-feather-alt"></i> ${item.nama_pena}</div>
-                        <div style="font-size:0.8rem; color:#888; margin-top:2px;">(Asli: ${item.nama_asli})</div>
+                        <div style="font-size:0.8rem; color:#888; margin-top:2px;">(${item.nama_asli}) - ${item.wa}</div>
                     </div>
+
+                    <div class="naskah-snippet">${snippet}</div>
 
                     <div class="card-actions">
                         <select class="status-select" onchange="updateStatus('${item.id}', this.value)">
                             <option value="Pending Review" ${item.status=='Pending Review'?'selected':''}>Pending</option>
-                            <option value="Diterima" ${item.status=='Diterima'?'selected':''}>Diterima (Lolos)</option>
+                            <option value="Diterima" ${item.status=='Diterima'?'selected':''}>Diterima</option>
                             <option value="Ditolak" ${item.status=='Ditolak'?'selected':''}>Ditolak</option>
                         </select>
 
-                        <a href="${item.link_naskah}" target="_blank" class="btn-mini btn-link">
-                            <i class="fas fa-external-link-alt"></i> Buka Naskah
-                        </a>
+                        <button class="btn-mini btn-view" onclick="openModal(${index})">
+                            <i class="fas fa-eye"></i> Baca Isi
+                        </button>
 
-                        <button class="btn-mini btn-copy" onclick="copyToClipboard(\`${copyContent}\`)">
+                        <button class="btn-mini btn-copy" onclick="copyFullData(${index})">
                             <i class="fas fa-copy"></i> Salin Data
                         </button>
 
@@ -332,17 +365,50 @@ ${item.biodata}
             });
         }
 
-        // 5. HELPER FUNCTIONS
-        window.copyToClipboard = function(text) {
-            // Decode HTML entities balik ke teks biasa
-            const textArea = document.createElement("textarea");
-            textArea.value = text.replace(/&quot;/g, '"');
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand("Copy");
-            document.body.removeChild(textArea);
+        // 5. GLOBAL FUNCTIONS
+        window.openModal = function(index) {
+            const item = allData[index];
+            document.getElementById('modal-title').innerText = item.judul + " - " + item.nama_pena;
+            document.getElementById('modal-content').innerHTML = `
+                <div style="border-bottom:1px solid #eee; padding-bottom:10px; margin-bottom:20px; font-size:0.9rem; color:#555;">
+                    <strong>Biodata Penulis:</strong><br>${item.biodata}
+                </div>
+                <div>${item.finalContent}</div>
+            `;
+            document.getElementById('readModal').style.display = 'flex';
+        }
+
+        window.closeModal = function() {
+            document.getElementById('readModal').style.display = 'none';
+        }
+
+        window.copyFullData = function(index) {
+            const item = allData[index];
+            const helper = document.getElementById('copy-helper');
             
-            showToast("Data Tersalin! Siap ditempel.");
+            // Format HTML untuk dicopy
+            const htmlContent = `
+                <p><strong>JUDUL:</strong> ${item.judul}</p>
+                <p><strong>PENULIS:</strong> ${item.nama_pena} (${item.nama_asli})</p>
+                <p><strong>KATEGORI:</strong> ${item.kategori}</p>
+                <hr>
+                <p><strong>BIODATA:</strong><br>${item.biodata}</p>
+                <hr>
+                <p><strong>ISI NASKAH:</strong></p>
+                ${item.finalContent}
+            `;
+
+            helper.innerHTML = htmlContent;
+            
+            // Seleksi dan Copy
+            const range = document.createRange();
+            range.selectNode(helper);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+
+            showToast("Data Lengkap + Naskah tersalin!");
         }
 
         function showToast(msg) {
@@ -355,15 +421,13 @@ ${item.biodata}
             try {
                 await updateDoc(doc(db, "magazine_submissions", docId), { status: newStatus });
                 showToast("Status diperbarui.");
-                // Update local data visual only (change border color)
-                // Real reload is better but simple UI update is enough
             } catch (e) {
                 alert("Gagal update: " + e.message);
             }
         }
 
         window.deleteEntry = async function(docId, title) {
-            if(confirm(`Hapus permanen naskah "${title}"?`)) {
+            if(confirm(`Hapus permanen "${title}"?`)) {
                 try {
                     await deleteDoc(doc(db, "magazine_submissions", docId));
                     allData = allData.filter(item => item.id !== docId);
@@ -374,13 +438,11 @@ ${item.biodata}
             }
         }
 
-        // Search Filter
         document.getElementById('search-input').addEventListener('keyup', (e) => {
             const keyword = e.target.value.toLowerCase();
             const filtered = allData.filter(item => 
                 item.judul.toLowerCase().includes(keyword) || 
-                item.nama_pena.toLowerCase().includes(keyword) ||
-                item.nama_asli.toLowerCase().includes(keyword)
+                item.nama_pena.toLowerCase().includes(keyword)
             );
             renderList(filtered);
         });
