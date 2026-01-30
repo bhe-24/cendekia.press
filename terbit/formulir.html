@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Naskah - Cendekia Aksara Press</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
+            --white: #ffffff;
+            --gray: #8892b0;
+            --light-bg: #f0f2f5;
+            --success: #00C851;
+            --pending: #ffbb33;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: var(--light-bg); 
+            min-height: 100vh; 
+            display: flex; flex-direction: column; 
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--navy-dark);
+            padding: 10px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-logo-wrapper {
+            width: 45px; height: 45px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--mustard);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header-logo { width: 60%; height: auto; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+        
+        .btn-back {
+            color: var(--mustard); text-decoration: none; font-weight: 600;
+            font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
+            border: 1px solid var(--mustard); padding: 5px 15px; border-radius: 20px;
+            transition: 0.3s;
+        }
+        .btn-back:hover { background: var(--mustard); color: var(--navy-dark); }
+
+        /* --- MAIN CONTENT --- */
+        main { flex: 1; padding: 30px 20px; max-width: 800px; margin: 0 auto; width: 100%; }
+
+        .section-title {
+            color: var(--navy-dark); font-weight: 700; margin-bottom: 20px;
+            border-left: 5px solid var(--mustard); padding-left: 15px; font-size: 1.5rem;
+        }
+
+        /* --- FORM STYLING --- */
+        .form-card {
+            background: var(--white); border-radius: 12px; padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 40px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; font-weight: 600; color: var(--navy-dark); margin-bottom: 8px; font-size: 0.9rem; }
+        .form-control {
+            width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;
+            font-size: 0.95rem; transition: 0.3s;
+        }
+        .form-control:focus { border-color: var(--mustard); outline: none; box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2); }
+        textarea.form-control { resize: vertical; min-height: 100px; }
+
+        /* Grid untuk Alamat */
+        .address-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        @media (max-width: 600px) { .address-grid { grid-template-columns: 1fr; } }
+
+        /* Pilihan Paket Radio */
+        .radio-group { display: flex; gap: 15px; flex-wrap: wrap; }
+        .radio-option {
+            flex: 1; min-width: 120px; position: relative;
+        }
+        .radio-option input { display: none; }
+        .radio-option label {
+            display: block; text-align: center; padding: 15px;
+            border: 2px solid #ddd; border-radius: 8px; cursor: pointer;
+            font-weight: 600; color: #666; transition: 0.3s;
+        }
+        .radio-option input:checked + label {
+            border-color: var(--mustard); background: #fff8e1; color: var(--navy-dark);
+        }
+
+        /* Pernyataan Persetujuan */
+        .compliance-box {
+            background: #f9f9f9; padding: 20px; border-radius: 8px;
+            border: 1px solid #eee; margin-top: 30px;
+        }
+        .checkbox-item {
+            display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px;
+            font-size: 0.85rem; color: #555;
+        }
+        .checkbox-item input { margin-top: 3px; cursor: pointer; }
+
+        /* Tombol Submit */
+        .btn-submit {
+            width: 100%; padding: 15px; background: var(--navy-dark); color: var(--white);
+            border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; margin-top: 20px; transition: 0.3s;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
+        }
+        .btn-submit:hover { background: var(--navy-light); transform: translateY(-2px); }
+
+        /* --- RIWAYAT (HISTORY) --- */
+        .history-section { margin-top: 50px; }
+        .history-card {
+            background: var(--white); border-radius: 10px; padding: 20px;
+            margin-bottom: 15px; border-left: 5px solid var(--gray);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05); position: relative;
+        }
+        .history-card.status-pending { border-left-color: var(--pending); }
+        .history-card.status-success { border-left-color: var(--success); }
+        .history-card.status-reject { border-left-color: #ff4444; }
+
+        .history-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .history-title { font-weight: 700; color: var(--navy-dark); }
+        .history-date { font-size: 0.8rem; color: #888; }
+        .history-badge {
+            font-size: 0.75rem; padding: 3px 10px; border-radius: 20px;
+            background: #eee; color: #555; font-weight: 600;
+        }
+        .status-pending .history-badge { background: #fff3cd; color: #856404; }
+        .status-success .history-badge { background: #d4edda; color: #155724; }
+
+        /* Notification */
+        #notification-area { position: fixed; top: 20px; right: 20px; z-index: 9999; }
+        .toast {
+            background: var(--white); color: var(--navy-dark); padding: 15px;
+            border-radius: 8px; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 5px solid var(--success); display: none;
+        }
+        .toast.show { display: block; animation: slideIn 0.3s; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        footer { 
+            background-color: var(--navy-dark); color: var(--white); 
+            padding: 20px; font-size: 0.75rem; text-align: center; margin-top: auto; 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="notification-area"></div>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logo-wrapper">
+                <img src="https://i.imgur.com/5Srjyo4.png" alt="Logo" class="header-logo">
+            </div>
+            <div class="header-title">KIRIM NASKAH</div>
+        </div>
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
+    </header>
+
+    <main>
+        <h2 class="section-title">Formulir Pengiriman Naskah</h2>
+        
+        <form id="submission-form" class="form-card">
+            <div class="form-group">
+                <label class="form-label">Nama Lengkap (Sesuai KTP/Identitas)</label>
+                <input type="text" id="inp-nama" class="form-control" required>
+            </div>
+            <div class="address-grid">
+                <div class="form-group">
+                    <label class="form-label">Umur</label>
+                    <input type="number" id="inp-umur" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nomor WhatsApp Aktif</label>
+                    <input type="number" id="inp-wa" class="form-control" placeholder="08..." required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Alamat Email</label>
+                <input type="email" id="inp-email" class="form-control" readonly style="background: #eee;">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Judul Naskah</label>
+                <input type="text" id="inp-judul" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Pilihan Paket Terbit</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" name="paket" id="pkt-gratis" value="Gratis (Indie)" required>
+                        <label for="pkt-gratis">Gratis (Indie)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="paket" id="pkt-reguler" value="Reguler">
+                        <label for="pkt-reguler">Reguler</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="paket" id="pkt-ekspres" value="Ekspres (VIP)">
+                        <label for="pkt-ekspres">Ekspres (VIP)</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Sinopsis Singkat</label>
+                <textarea id="inp-sinopsis" class="form-control" placeholder="Gambaran singkat isi cerita..." required></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Biodata Penulis (Narasi)</label>
+                <textarea id="inp-biodata" class="form-control" placeholder="Contoh: Budi adalah penulis kelahiran..." required></textarea>
+            </div>
+
+            <h4 style="margin: 20px 0 10px 0; color:var(--navy-dark);">Alamat Pengiriman Buku</h4>
+            <div class="form-group">
+                <label class="form-label">Jalan / RT / RW / Nomor Rumah</label>
+                <input type="text" id="addr-jalan" class="form-control" required>
+            </div>
+            <div class="address-grid">
+                <div class="form-group">
+                    <label class="form-label">Kecamatan</label>
+                    <input type="text" id="addr-kec" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Kabupaten / Kota</label>
+                    <input type="text" id="addr-kab" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Provinsi</label>
+                    <input type="text" id="addr-prov" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Kode Pos</label>
+                    <input type="number" id="addr-pos" class="form-control" required>
+                </div>
+            </div>
+
+            <div class="compliance-box">
+                <h4 style="margin-bottom: 15px; color:var(--navy-dark);">Pernyataan Kepatuhan</h4>
+                <div class="checkbox-item">
+                    <input type="checkbox" required> <span>Saya menjamin naskah ini adalah 100% KARYA ASLI dan bukan hasil plagiat.</span>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" required> <span>Naskah TIDAK mengandung unsur SARA, Pornografi, atau ujaran kebencian.</span>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" required> <span>Naskah belum pernah diterbitkan atau sedang dikirim ke penerbit lain.</span>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" required> <span>Saya telah membaca dan menyetujui Syarat & Ketentuan paket yang saya pilih.</span>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" required> <span>Data diri yang saya isi adalah benar dan dapat dipertanggungjawabkan.</span>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" required> <span>Saya bertanggung jawab penuh secara hukum atas isi tulisan saya.</span>
+                </div>
+                <div class="checkbox-item">
+                    <input type="checkbox" required> <span><b>Saya menyatakan naskah sudah siap dikurasi oleh redaksi.</b></span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-paper-plane"></i> KIRIM FORMULIR & BUKA EMAIL
+            </button>
+            <p style="text-align: center; font-size: 0.8rem; color: #888; margin-top: 10px;">
+                *Setelah klik tombol ini, Anda akan diarahkan ke aplikasi Email untuk melampirkan file naskah (.docx).
+            </p>
+        </form>
+
+        <h2 class="section-title" style="margin-top: 50px;">Riwayat Pengiriman</h2>
+        <div id="history-container">
+            <p style="color: #888; text-align: center;">Memuat riwayat...</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cendekia Aksara Press.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, where, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        let currentUser = null;
+
+        // 1. CEK LOGIN
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                document.getElementById('inp-email').value = user.email;
+                if(user.displayName) document.getElementById('inp-nama').value = user.displayName;
+                
+                // Load Riwayat
+                loadHistory(user.uid);
+            } else {
+                window.location.href = "../index.html";
+            }
+        });
+
+        // 2. LOAD RIWAYAT (Realtime)
+        function loadHistory(uid) {
+            const container = document.getElementById('history-container');
+            const q = query(
+                collection(db, "submissions"), 
+                where("uid", "==", uid), 
+                orderBy("timestamp", "desc")
+            );
+
+            onSnapshot(q, (snapshot) => {
+                container.innerHTML = "";
+                if (snapshot.empty) {
+                    container.innerHTML = "<p style='text-align:center; color:#999;'>Belum ada naskah yang dikirim.</p>";
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    let dateStr = "Baru saja";
+                    if(data.timestamp) dateStr = data.timestamp.toDate().toLocaleDateString("id-ID", {
+                        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+                    });
+
+                    // Tentukan warna status
+                    let statusClass = "status-pending";
+                    if(data.status === "Diterima") statusClass = "status-success";
+                    if(data.status === "Ditolak") statusClass = "status-reject";
+
+                    const card = `
+                    <div class="history-card ${statusClass}">
+                        <div class="history-header">
+                            <span class="history-title">${data.judul}</span>
+                            <span class="history-badge">${data.paket}</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #555; margin-bottom: 5px;">
+                            Status: <b>${data.status || "Menunggu Email Masuk"}</b>
+                        </div>
+                        <div class="history-date">Dikirim pada: ${dateStr}</div>
+                    </div>`;
+                    container.innerHTML += card;
+                });
+            });
+        }
+
+        // 3. SUBMIT FORM
+        document.getElementById('submission-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if(!currentUser) return;
+
+            const btn = document.querySelector('.btn-submit');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menyimpan Data...';
+            btn.disabled = true;
+
+            // Ambil Data
+            const formData = {
+                uid: currentUser.uid,
+                nama: document.getElementById('inp-nama').value,
+                umur: document.getElementById('inp-umur').value,
+                wa: document.getElementById('inp-wa').value,
+                email: currentUser.email,
+                judul: document.getElementById('inp-judul').value,
+                paket: document.querySelector('input[name="paket"]:checked').value,
+                sinopsis: document.getElementById('inp-sinopsis').value,
+                biodata: document.getElementById('inp-biodata').value,
+                alamat: {
+                    jalan: document.getElementById('addr-jalan').value,
+                    kecamatan: document.getElementById('addr-kec').value,
+                    kabupaten: document.getElementById('addr-kab').value,
+                    provinsi: document.getElementById('addr-prov').value,
+                    kodepos: document.getElementById('addr-pos').value,
+                },
+                status: "Menunggu Email Masuk", // Status awal di DB
+                timestamp: serverTimestamp()
+            };
+
+            try {
+                // A. Simpan ke Firestore
+                await addDoc(collection(db, "submissions"), formData);
+
+                // B. Buat Link Email (Mailto)
+                const subject = `[${formData.paket}] - ${formData.judul} - ${formData.nama}`;
+                const body = `Halo Admin Cendekia Aksara,
+
+Saya telah mengisi formulir pengiriman naskah di Dashboard.
+Berikut adalah lampiran naskah saya yang siap dikurasi.
+
+Judul: ${formData.judul}
+Penulis: ${formData.nama}
+Paket: ${formData.paket}
+
+Saya menyatakan naskah ini orisinil dan siap diproses.
+(Mohon lampirkan file .docx di sini)
+
+Terima kasih.`;
+
+                // Encode URI agar spasi dan enter terbaca di email
+                const mailtoLink = `mailto:cendekia.aksara@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+                // Tampilkan Notifikasi
+                showToast("Formulir Tersimpan! Mengarahkan ke Email...");
+
+                // C. Buka Email App
+                setTimeout(() => {
+                    window.location.href = mailtoLink;
+                    
+                    // Reset Form
+                    document.getElementById('submission-form').reset();
+                    document.getElementById('inp-email').value = currentUser.email; // Isi ulang email
+                    btn.innerHTML = '<i class="fas fa-paper-plane"></i> KIRIM FORMULIR & BUKA EMAIL';
+                    btn.disabled = false;
+                }, 1500);
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Gagal mengirim data: " + error.message);
+                btn.disabled = false;
+            }
+        });
+
+        function showToast(msg) {
+            const area = document.getElementById('notification-area');
+            area.innerHTML = `<div class="toast show">${msg}</div>`;
+            setTimeout(() => { area.innerHTML = ''; }, 3000);
+        }
+    </script>
+</body>
+</html>
