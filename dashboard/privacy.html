@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kebijakan Privasi - Cendekia Aksara Press</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
+            --white: #ffffff;
+            --gray: #666666;
+            --light-bg: #f8f9fa;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: var(--light-bg); 
+            min-height: 100vh; 
+            display: flex; flex-direction: column; 
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--navy-dark);
+            padding: 10px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        
+        .header-logo-wrapper {
+            width: 45px; height: 45px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--mustard);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header-logo { width: 60%; height: auto; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+
+        /* Tombol Kembali */
+        .btn-back {
+            color: var(--mustard);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 8px;
+            transition: 0.3s;
+            border: 1px solid var(--mustard);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+        .btn-back:hover { background: var(--mustard); color: var(--navy-dark); }
+
+        /* --- MAIN CONTENT --- */
+        main { flex: 1; padding: 40px 20px; max-width: 900px; margin: 0 auto; width: 100%; }
+
+        .doc-header { text-align: center; margin-bottom: 40px; }
+        .doc-header h1 { font-size: 1.8rem; color: var(--navy-dark); margin-bottom: 10px; }
+        .doc-header p { color: var(--gray); font-size: 0.9rem; }
+        
+        .legal-badge {
+            background: #e8f5e9; color: #2e7d32; padding: 10px 20px;
+            border-radius: 8px; font-size: 0.85rem; display: inline-block; margin-top: 15px;
+            border: 1px solid #c8e6c9;
+        }
+        .legal-badge i { margin-right: 5px; }
+
+        /* --- CONTENT STYLING --- */
+        .privacy-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-top: 5px solid var(--navy-dark);
+        }
+
+        .bab-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--navy-dark);
+            border-bottom: 2px solid var(--mustard);
+            padding-bottom: 8px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .pasal-row {
+            display: grid; grid-template-columns: 80px 1fr; gap: 15px;
+            margin-bottom: 15px; border-bottom: 1px solid #f0f0f0; padding-bottom: 15px;
+        }
+        .pasal-row:last-child { border-bottom: none; }
+        
+        .pasal-num { font-weight: 700; color: var(--navy-light); font-size: 0.9rem; }
+        .pasal-text { font-size: 0.9rem; color: #444; line-height: 1.6; text-align: justify; }
+        .pasal-text strong { color: var(--navy-dark); }
+
+        /* --- FOOTER --- */
+        footer { 
+            background-color: var(--navy-dark); color: var(--white); 
+            padding: 20px; font-size: 0.75rem; text-align: center; margin-top: auto; 
+        }
+
+        @media (max-width: 768px) {
+            .privacy-content { padding: 20px; }
+            .pasal-row { grid-template-columns: 1fr; gap: 5px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logo-wrapper">
+                <img src="https://i.imgur.com/5Srjyo4.png" alt="Logo" class="header-logo">
+            </div>
+            <div class="header-title">KEBIJAKAN DATA</div>
+        </div>
+        <a href="index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> <span style="display:none; display:md-block;">Kembali</span>
+        </a>
+    </header>
+
+    <main>
+        <div class="doc-header">
+            <h1>Kebijakan Privasi & Perlindungan Data</h1>
+            <p>Bagaimana Cendekia Aksara Press mengelola dan melindungi data Anda.</p>
+            <div class="legal-badge">
+                <i class="fas fa-balance-scale"></i> Patuh pada UU No. 27 Tahun 2022 (PDP) & UU ITE
+            </div>
+        </div>
+
+        <div class="privacy-content">
+            <p style="margin-bottom: 30px; color: #555; line-height: 1.6;">
+                Cendekia Aksara Press ("Kami") menghormati privasi Anda. Dokumen ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi data pribadi Anda ("Pengguna") dalam ekosistem aplikasi web kami. Kebijakan ini mengikat secara hukum.
+            </p>
+
+            <div class="bab-title">BAB I: KETENTUAN UMUM</div>
+            
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 1</div>
+                <div class="pasal-text"><strong>Definisi Data Pribadi.</strong> Data Pribadi adalah data tentang orang perseorangan yang teridentifikasi atau dapat diidentifikasi secara tersendiri atau dikombinasikan dengan informasi lainnya baik secara langsung maupun tidak langsung melalui sistem elektronik atau nonelektronik.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 2</div>
+                <div class="pasal-text"><strong>Pengendali Data.</strong> Cendekia Aksara Press bertindak sebagai Pengendali Data yang menentukan tujuan dan melakukan kendali pemrosesan data pribadi Pengguna.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 3</div>
+                <div class="pasal-text"><strong>Subjek Data.</strong> Pengguna (Penulis/Pembaca) yang mendaftar pada platform ini diakui sebagai Subjek Data yang memiliki hak atas privasinya.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 4</div>
+                <div class="pasal-text"><strong>Persetujuan (Consent).</strong> Dengan mendaftar akun, Pengguna dianggap memberikan persetujuan eksplisit kepada Kami untuk memproses datanya sesuai kebijakan ini.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 5</div>
+                <div class="pasal-text"><strong>Transparansi.</strong> Kami menjamin transparansi penuh dalam setiap pengambilan data, tidak ada pengambilan data tersembunyi (hidden tracker) yang merugikan.</div>
+            </div>
+
+            <div class="bab-title">BAB II: DATA YANG DIKUMPULKAN</div>
+            
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 6</div>
+                <div class="pasal-text"><strong>Data Identitas.</strong> Kami mengumpulkan Nama Lengkap, Alamat Email, Nomor WhatsApp, dan Usia untuk keperluan verifikasi akun dan komunikasi.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 7</div>
+                <div class="pasal-text"><strong>Data Karya.</strong> Naskah buku (File .docx), Sinopsis, dan Judul Buku yang diunggah disimpan untuk keperluan proses editorial dan penerbitan.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 8</div>
+                <div class="pasal-text"><strong>Data Visual.</strong> Foto Profil yang diunggah pengguna akan diproses dan disimpan menggunakan layanan pihak ketiga (ImgBB API) yang terintegrasi.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 9</div>
+                <div class="pasal-text"><strong>Data Logistik.</strong> Alamat lengkap (Jalan, Kecamatan, Kode Pos) dikumpulkan semata-mata untuk keperluan pengiriman buku fisik dan perhitungan ongkos kirim.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 10</div>
+                <div class="pasal-text"><strong>Data Keuangan.</strong> Kami tidak menyimpan data kartu kredit. Bukti transfer yang diunggah hanya disimpan sementara untuk verifikasi pembayaran, lalu diarsipkan secara aman.</div>
+            </div>
+
+            <div class="bab-title">BAB III: TUJUAN PENGGUNAAN DATA</div>
+            
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 11</div>
+                <div class="pasal-text"><strong>Layanan Penerbitan.</strong> Data digunakan utama untuk memproses naskah menjadi buku (layout, desain, cetak, dan registrasi QRCBN).</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 12</div>
+                <div class="pasal-text"><strong>Komunikasi.</strong> Email dan WhatsApp digunakan untuk mengirim notifikasi status naskah, invoice, dan informasi promo Cendekia Aksara.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 13</div>
+                <div class="pasal-text"><strong>Pengiriman Fisik.</strong> Nama, Alamat, dan No. HP akan diberikan kepada pihak Logistik (JNE/J&T) hanya untuk keperluan pengantaran paket.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 14</div>
+                <div class="pasal-text"><strong>Keamanan Akun.</strong> Data login digunakan untuk mengamankan akses ke Dashboard agar tidak ada pihak tidak berwenang yang mengakses karya Anda.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 15</div>
+                <div class="pasal-text"><strong>Analisis Internal.</strong> Data demografis (usia/kota) digunakan secara anonim untuk statistik internal guna meningkatkan kualitas layanan kami.</div>
+            </div>
+
+            <div class="bab-title">BAB IV: PENYIMPANAN DAN KEAMANAN</div>
+            
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 16</div>
+                <div class="pasal-text"><strong>Cloud Storage.</strong> Seluruh data disimpan di <strong>Google Firebase Firestore</strong> dan <strong>Firebase Authentication</strong> yang memiliki standar keamanan enkripsi internasional.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 17</div>
+                <div class="pasal-text"><strong>Tanpa Local Storage.</strong> Sesuai kebijakan teknis, kami meminimalisir penggunaan Local Storage browser untuk data sensitif guna mencegah pencurian data via perangkat (XSS Attack).</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 18</div>
+                <div class="pasal-text"><strong>Enkripsi Password.</strong> Kata sandi (password) Anda disimpan dalam bentuk <i>Hash</i> (terenkripsi) oleh Firebase. Tim Admin Cendekia Aksara pun tidak bisa melihat password Anda.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 19</div>
+                <div class="pasal-text"><strong>Media Hosting.</strong> File gambar (foto profil) disimpan di server ImgBB dengan API Key yang aman. Kami tidak bertanggung jawab atas kebijakan privasi internal ImgBB.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 20</div>
+                <div class="pasal-text"><strong>Retensi Data.</strong> Data akun yang tidak aktif selama 5 (lima) tahun akan dihapus permanen dari sistem kami demi efisiensi server.</div>
+            </div>
+
+            <div class="bab-title">BAB V: HAK PENGGUNA</div>
+            
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 21</div>
+                <div class="pasal-text"><strong>Hak Akses.</strong> Pengguna berhak melihat seluruh data profil dirinya melalui halaman Dashboard/Profil setiap saat.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 22</div>
+                <div class="pasal-text"><strong>Hak Koreksi.</strong> Pengguna berhak dan wajib mengubah data jika terdapat kekeliruan informasi (update alamat/no WA) melalui fitur Edit Profil.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 23</div>
+                <div class="pasal-text"><strong>Hak Hapus (Right to be Forgotten).</strong> Pengguna berhak mengajukan penghapusan akun permanen dengan menghubungi Admin via email. Penghapusan akun bersifat permanen.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 24</div>
+                <div class="pasal-text"><strong>Hak Tolak Promosi.</strong> Pengguna berhak meminta agar email/WA mereka tidak dimasukkan ke dalam daftar broadcast promosi (Unsubscribe).</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 25</div>
+                <div class="pasal-text"><strong>Hak Salinan.</strong> Penulis berhak meminta salinan naskah digital (PDF Final) yang tersimpan di database kami jika file asli mereka hilang.</div>
+            </div>
+
+            <div class="bab-title">BAB VI: PENGUNGKAPAN KEPADA PIHAK KETIGA</div>
+            
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 26</div>
+                <div class="pasal-text"><strong>Larangan Jual Data.</strong> Cendekia Aksara BERKOMITMEN KERAS untuk <strong>TIDAK MENJUAL</strong>, menyewakan, atau menukar data pribadi pengguna kepada pihak pemasaran manapun.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 27</div>
+                <div class="pasal-text"><strong>Mitra Terpercaya.</strong> Data hanya dibagikan kepada mitra operasional esensial: Google (Server), ImgBB (Gambar), dan Ekspedisi (JNE/J&T/SiCepat).</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 28</div>
+                <div class="pasal-text"><strong>Kewajiban Hukum.</strong> Kami berhak mengungkapkan data pengguna jika diperintahkan secara resmi oleh Pengadilan atau Kepolisian RI untuk keperluan penyidikan tindak pidana.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 29</div>
+                <div class="pasal-text"><strong>Alih Kepemilikan.</strong> Jika Cendekia Aksara melakukan merger atau akuisisi, data pengguna akan dialihkan ke entitas baru dengan pemberitahuan terlebih dahulu.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 30</div>
+                <div class="pasal-text"><strong>Tautan Luar.</strong> Website kami mungkin berisi tautan ke situs lain. Kami tidak bertanggung jawab atas praktik privasi situs eksternal tersebut.</div>
+            </div>
+
+            <div class="bab-title">BAB VII: COOKIES & PELACAKAN</div>
+            
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 31</div>
+                <div class="pasal-text"><strong>Penggunaan Cookies.</strong> Kami menggunakan session cookies hanya untuk menjaga status login Anda tetap aktif saat berpindah halaman.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 32</div>
+                <div class="pasal-text"><strong>Bukan Pelacakan Iklan.</strong> Kami tidak menggunakan cookies untuk melacak perilaku browsing Anda di luar situs Cendekia Aksara untuk kepentingan iklan.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 33</div>
+                <div class="pasal-text"><strong>Kontrol Browser.</strong> Anda dapat menonaktifkan cookies melalui pengaturan browser, namun hal ini akan menyebabkan fitur login otomatis tidak berfungsi.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 34</div>
+                <div class="pasal-text"><strong>IP Address.</strong> Alamat IP Anda mungkin terekam oleh sistem Firebase untuk keperluan keamanan (mendeteksi aktivitas login mencurigakan).</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 35</div>
+                <div class="pasal-text"><strong>Cache Data.</strong> Browser Anda mungkin menyimpan cache (gambar/css) untuk mempercepat loading, namun data form sensitif tidak akan di-cache.</div>
+            </div>
+
+            <div class="bab-title">BAB VIII: BATASAN & HUKUM BERLAKU</div>
+            
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 36</div>
+                <div class="pasal-text"><strong>Batasan Tanggung Jawab.</strong> Kami telah menerapkan keamanan terbaik. Namun, kami tidak bertanggung jawab atas kebocoran data yang disebabkan oleh kelalaian pengguna (memberikan password ke orang lain) atau serangan siber canggih yang melampaui standar industri.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 37</div>
+                <div class="pasal-text"><strong>Phishing.</strong> Kami tidak pernah meminta password Anda melalui WhatsApp atau Email. Hati-hati terhadap penipuan (Phishing) yang mengatasnamakan Cendekia Aksara.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 38</div>
+                <div class="pasal-text"><strong>Yurisdiksi.</strong> Kebijakan ini diatur dan ditafsirkan sesuai dengan hukum Negara Kesatuan Republik Indonesia.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 39</div>
+                <div class="pasal-text"><strong>Penyelesaian Sengketa.</strong> Sengketa privasi akan diselesaikan terlebih dahulu melalui musyawarah. Jika gagal, akan dibawa ke Badan Arbitrase atau Pengadilan yang berwenang.</div>
+            </div>
+            <div class="pasal-row">
+                <div class="pasal-num">Pasal 40</div>
+                <div class="pasal-text"><strong>Perubahan Kebijakan.</strong> Kami dapat memperbarui kebijakan ini sewaktu-waktu. Perubahan material akan diinformasikan melalui notifikasi dashboard. Penggunaan berkelanjutan dianggap sebagai persetujuan.</div>
+            </div>
+
+            <p style="text-align: center; margin-top: 40px; color: var(--navy-dark); font-weight: 600;">
+                Terakhir Diperbarui: 30 Januari 2026<br>
+                Data Protection Officer - Cendekia Aksara Press
+            </p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cendekia Aksara Press. Hak Cipta Dilindungi Undang-Undang.</p>
+    </footer>
+
+</body>
+</html>
