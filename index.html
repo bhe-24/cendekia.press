@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk - Cendekia Aksara Press</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --navy-dark: #0a192f;   /* Warna Dasar Gelap */
+            --navy-light: #172a45;  /* Warna Aksen Geometri */
+            --mustard: #ffc107;     /* Warna Utama Cendekia */
+            --mustard-hover: #e0a800;
+            --white: #ffffff;
+            --gray: #8892b0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--navy-dark);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- Geometric Background (Nuansa Perusahaan) --- */
+        .geometric-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: linear-gradient(45deg, var(--navy-light), transparent);
+            border-radius: 20px;
+            opacity: 0.5;
+        }
+
+        .shape-1 { width: 400px; height: 400px; top: -100px; left: -100px; transform: rotate(45deg); border: 2px solid var(--mustard); }
+        .shape-2 { width: 300px; height: 300px; bottom: -50px; right: -50px; transform: rotate(15deg); background: var(--navy-light); }
+        .shape-3 { width: 150px; height: 150px; top: 40%; left: 20%; border-radius: 50%; border: 1px solid rgba(255, 193, 7, 0.2); }
+
+        /* --- Container Utama --- */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 400px; /* Default Mobile */
+            padding: 20px;
+        }
+
+        /* --- Branding Header --- */
+        .brand-header {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--white);
+        }
+
+        .logo {
+            width: 80px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(255, 193, 7, 0.3));
+        }
+
+        .brand-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--mustard);
+            letter-spacing: 1px;
+        }
+
+        .brand-header p {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* --- Form Box Style --- */
+        .form-box {
+            background: rgba(23, 42, 69, 0.95); /* Glassmorphism effect */
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: none; /* Disembunyikan dulu */
+            animation: fadeIn 0.5s ease;
+        }
+
+        .form-box.active {
+            display: block; /* Munculkan yang aktif */
+        }
+
+        .form-box h3 {
+            color: var(--white);
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .form-box .desc {
+            color: var(--gray);
+            font-size: 0.85rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* --- Inputs --- */
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--mustard);
+            font-size: 0.9rem;
+        }
+
+        .input-group .toggle-password {
+            left: auto;
+            right: 15px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 40px;
+            background: var(--navy-dark);
+            border: 1px solid #233554;
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 0.9rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: var(--mustard);
+            box-shadow: 0 0 5px rgba(255, 193, 7, 0.3);
+        }
+
+        /* --- Buttons & Links --- */
+        .actions {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .actions a, .switch-text a {
+            color: var(--mustard);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .actions a:hover, .switch-text a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background: var(--mustard);
+            border: none;
+            border-radius: 8px;
+            color: var(--navy-dark);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary:hover {
+            background: var(--mustard-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .switch-text {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--gray);
+            font-size: 0.85rem;
+        }
+
+        /* --- Animation --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Responsive Laptop/Desktop --- */
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 900px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 50px;
+            }
+            
+            .brand-header {
+                text-align: left;
+                flex: 1;
+            }
+            
+            .brand-header h2 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .brand-header p {
+                font-size: 1.1rem;
+            }
+            
+            .logo {
+                width: 120px;
+            }
+
+            .form-box {
+                flex: 1;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="geometric-bg">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+        <div class="brand-header">
+            <img src="https://imgur.com/5Srjyo4.png" alt="Logo CA Press" class="logo">
+            <h2>Cendekia Aksara Press</h2>
+            <p>Platform Penerbitan & Literasi Digital</p>
+        </div>
+
+        <div id="login-box" class="form-box active">
+            <h3>Selamat Datang Kembali</h3>
+            <form id="form-login">
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="login-email" placeholder="Email Terdaftar" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login-password" placeholder="Kata Sandi" required>
+                    <i class="fas fa-eye toggle-password" onclick="togglePass('login-password')"></i>
+                </div>
+                <div class="actions">
+                    <a href="#" onclick="showPage('forgot')">Lupa Password?</a>
+                </div>
+                <button type="submit" class="btn-primary">MASUK SEKARANG</button>
+            </form>
+            <p class="switch-text">Belum punya akun? <a href="#" onclick="showPage('register')">Daftar di sini</a></p>
+        </div>
+
+        <div id="register-box" class="form-box">
+            <h3>Bergabung Jadi Penulis</h3>
+            <form id="form-register">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="reg-name" placeholder="Nama Lengkap" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-birthday-cake"></i>
+                    <input type="number" id="reg-age" placeholder="Umur" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="reg-email" placeholder="Alamat Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="reg-password" placeholder="Buat Kata Sandi" required>
+                    <i class="fas fa-eye toggle-password" onclick="togglePass('reg-password')"></i>
+                </div>
+                <button type="submit" class="btn-primary">DAFTAR AKUN</button>
+            </form>
+            <p class="switch-text">Sudah punya akun? <a href="#" onclick="showPage('login')">Masuk di sini</a></p>
+        </div>
+
+        <div id="forgot-box" class="form-box">
+            <h3>Reset Kata Sandi</h3>
+            <p class="desc">Masukkan email Anda, kami akan mengirimkan tautan pemulihan.</p>
+            <form id="form-forgot">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="forgot-name" placeholder="Nama Lengkap (Konfirmasi)" required>
+                </div>
+                <div class="input-group">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="forgot-email" placeholder="Email Terdaftar" required>
+                </div>
+                <button type="submit" class="btn-primary">KIRIM LINK RESET</button>
+            </form>
+            <p class="switch-text"><a href="#" onclick="showPage('login')"> <i class="fas fa-arrow-left"></i> Kembali ke Login</a></p>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import fungsi Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { 
+            getAuth, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword,
+            sendPasswordResetEmail,
+            updateProfile 
+        } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+        // Konfigurasi Firebase Anda
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // --- UI FUNCTION (GANTI HALAMAN) ---
+        window.showPage = function(pageId) {
+            document.querySelectorAll('.form-box').forEach(el => el.classList.remove('active'));
+            document.getElementById(pageId + '-box').classList.add('active');
+        }
+
+        window.togglePass = function(id) {
+            const input = document.getElementById(id);
+            const icon = input.nextElementSibling;
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.add('fa-eye');
+                icon.classList.remove('fa-eye-slash');
+            }
+        }
+
+        // --- 1. LOGIKA REGISTER / DAFTAR ---
+        const registerForm = document.getElementById('form-register');
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const btn = registerForm.querySelector('button');
+            
+            btn.innerText = "Memproses...";
+            btn.disabled = true;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    updateProfile(user, { displayName: name }).then(() => {
+                        alert(`Selamat Datang, ${name}! Akun berhasil dibuat.`);
+                        
+                        // CEK REDIRECT SETELAH DAFTAR (Auto Login)
+                        if(email.endsWith('@ac.id')) {
+                            window.location.href = "portal_admin/index.html";
+                        } else {
+                            window.location.href = "dashboard/index.html"; 
+                        }
+                    });
+                })
+                .catch((error) => {
+                    btn.innerText = "DAFTAR AKUN";
+                    btn.disabled = false;
+                    alert("Gagal Daftar: " + error.message);
+                });
+        });
+
+        // --- 2. LOGIKA LOGIN (DENGAN PEMISAHAN ADMIN) ---
+        const loginForm = document.getElementById('form-login');
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const btn = loginForm.querySelector('button');
+            
+            btn.innerText = "Memverifikasi...";
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    console.log("Login sukses:", user.email);
+
+                    // LOGIKA REDIRECT ADMIN vs USER BIASA
+                    // Jika email berakhiran @ac.id -> Masuk Portal Admin
+                    if (user.email.endsWith('@ac.id')) {
+                        alert("Halo Admin! Mengarahkan ke Portal Pengelola...");
+                        window.location.href = "portal_admin/index.html";
+                    } 
+                    // Jika email biasa (gmail, yahoo, dll) -> Masuk Dashboard User
+                    else {
+                        window.location.href = "dashboard/index.html";
+                    }
+                })
+                .catch((error) => {
+                    btn.innerText = "MASUK SEKARANG";
+                    alert("Login Gagal: Email atau Password Salah.");
+                });
+        });
+
+        // --- 3. LOGIKA LUPA PASSWORD ---
+        const forgotForm = document.getElementById('form-forgot');
+        forgotForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('forgot-email').value;
+            const btn = forgotForm.querySelector('button');
+            
+            btn.innerText = "Mengirim...";
+
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    alert(`Link reset password telah dikirim ke ${email}.\nCek Inbox atau SPAM.`);
+                    btn.innerText = "KIRIM LINK RESET";
+                    showPage('login');
+                })
+                .catch((error) => {
+                    btn.innerText = "KIRIM LINK RESET";
+                    alert("Error: " + error.message);
+                });
+        });
+    </script>
+</body>
+</html>
