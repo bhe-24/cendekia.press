@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelola Banner - Admin Cendekia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
+            --white: #ffffff;
+            --light-bg: #f4f6f9;
+            --danger: #dc3545;
+            --success: #28a745;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { background-color: var(--light-bg); min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--navy-dark);
+            padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+        
+        /* Tombol Kembali ke Dashboard Admin */
+        .btn-back {
+            color: var(--mustard); text-decoration: none; font-weight: 600;
+            font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
+            border: 1px solid var(--mustard); padding: 5px 15px; border-radius: 20px;
+            transition: 0.3s;
+        }
+        .btn-back:hover { background: var(--mustard); color: var(--navy-dark); }
+
+        /* --- LAYOUT UTAMA --- */
+        main { 
+            flex: 1; padding: 30px 20px; max-width: 1100px; margin: 0 auto; width: 100%;
+            display: grid; grid-template-columns: 1fr 350px; gap: 30px; /* Kiri Form, Kanan Preview HP */
+        }
+
+        /* --- LEFT SIDE: UPLOAD & LIST --- */
+        .admin-panel {
+            background: var(--white); padding: 25px; border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .section-title { font-size: 1.2rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 5px; }
+        .section-desc { font-size: 0.85rem; color: #666; margin-bottom: 20px; }
+
+        /* Form Upload */
+        .upload-area {
+            border: 2px dashed #ccc; border-radius: 10px;
+            padding: 30px; text-align: center; cursor: pointer;
+            transition: 0.3s; margin-bottom: 20px; position: relative;
+        }
+        .upload-area:hover { border-color: var(--mustard); background: #fffdf5; }
+        .upload-area i { font-size: 2rem; color: var(--navy-light); margin-bottom: 10px; }
+        .upload-area p { font-size: 0.9rem; color: #666; }
+        #file-input { display: none; }
+
+        .btn-upload {
+            width: 100%; padding: 12px; background: var(--navy-dark); color: var(--white);
+            border: none; border-radius: 8px; font-weight: 700; cursor: pointer;
+            transition: 0.3s; opacity: 0.5; pointer-events: none; /* Disabled awal */
+        }
+        .btn-upload.ready { opacity: 1; pointer-events: all; }
+        .btn-upload:hover { background: var(--navy-light); }
+
+        /* List Banner Aktif */
+        .active-banners-list { margin-top: 30px; }
+        .banner-item {
+            display: flex; justify-content: space-between; align-items: center;
+            background: #f8f9fa; padding: 10px; border-radius: 8px;
+            margin-bottom: 10px; border: 1px solid #eee;
+        }
+        .banner-thumb { width: 80px; height: 45px; object-fit: cover; border-radius: 4px; }
+        .banner-info { flex: 1; margin-left: 15px; }
+        .banner-date { font-size: 0.75rem; color: #888; }
+        .btn-delete {
+            background: #ffebee; color: var(--danger); border: none;
+            width: 35px; height: 35px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; transition: 0.3s;
+        }
+        .btn-delete:hover { background: var(--danger); color: white; }
+
+        /* --- RIGHT SIDE: PHONE MOCKUP (PREVIEW) --- */
+        .preview-container {
+            position: sticky; top: 80px;
+        }
+        
+        .phone-mockup {
+            width: 300px; height: 600px;
+            background: var(--navy-dark);
+            border-radius: 30px; padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin: 0 auto; position: relative;
+        }
+        
+        .phone-screen {
+            width: 100%; height: 100%;
+            background: #f0f2f5; border-radius: 20px;
+            overflow: hidden; position: relative;
+        }
+
+        /* Simulasi Header App */
+        .app-header {
+            background: var(--navy-dark); height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 0.8rem; font-weight: bold;
+        }
+
+        /* Simulasi Slider Banner */
+        .app-banner-area {
+            width: 100%; height: 150px;
+            background: #ddd; position: relative;
+            overflow: hidden;
+        }
+        .mock-banner {
+            width: 100%; height: 100%; object-fit: cover;
+            position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 0.5s;
+        }
+        .mock-banner.active { opacity: 1; }
+        
+        .mock-content { padding: 15px; }
+        .mock-line { height: 10px; background: #e0e0e0; border-radius: 5px; margin-bottom: 10px; }
+        .w-50 { width: 50%; } .w-80 { width: 80%; }
+
+        /* Notification & Loader */
+        #loader-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.9); z-index: 9999;
+            display: none; justify-content: center; align-items: center;
+            flex-direction: column; color: var(--mustard);
+        }
+        #notification-area { position: fixed; top: 20px; right: 20px; z-index: 9999; }
+        .toast {
+            background: var(--white); color: var(--navy-dark); padding: 15px;
+            border-radius: 8px; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border-left: 5px solid var(--success); display: none;
+        }
+        .toast.show { display: block; animation: slideIn 0.3s; }
+        @keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+
+        @media (max-width: 900px) {
+            main { grid-template-columns: 1fr; }
+            .preview-container { display: none; /* Sembunyikan mockup di HP admin biar ga sempit */ }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader-overlay">
+        <i class="fas fa-circle-notch fa-spin fa-3x"></i>
+        <p style="margin-top: 15px;">Mengupload ke Server...</p>
+    </div>
+    <div id="notification-area"></div>
+
+    <header>
+        <div class="header-left">
+            <div class="header-title">KELOLA BANNER UTAMA</div>
+        </div>
+        <a href="../index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Kembali ke Menu
+        </a>
+    </header>
+
+    <main>
+        <div class="admin-panel">
+            <h2 class="section-title">Update Slide Show</h2>
+            <p class="section-desc">Unggah gambar landscape (Rasio 2:1 disarankan) untuk ditampilkan di halaman utama siswa.</p>
+
+            <label for="file-input" class="upload-area" id="drop-area">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>Klik untuk memilih gambar atau seret file ke sini</p>
+                <div id="file-name" style="margin-top: 10px; font-weight: bold; color: var(--navy-dark);"></div>
+            </label>
+            <input type="file" id="file-input" accept="image/*">
+
+            <button id="btn-upload" class="btn-upload">
+                <i class="fas fa-save"></i> UNGGAH & TERBITKAN
+            </button>
+
+            <div class="active-banners-list">
+                <h3 style="font-size: 1rem; margin-bottom: 15px; border-bottom: 2px solid #eee; padding-bottom: 5px;">Banner yang Sedang Tayang</h3>
+                <div id="banner-list-container">
+                    <p style="text-align:center; color:#999;">Memuat data...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="preview-container">
+            <h3 style="text-align: center; margin-bottom: 10px; color: #666; font-size: 0.9rem;">Pratinjau Tampilan Siswa</h3>
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="app-header">CENDEKIA PRESS</div>
+                    
+                    <div class="app-banner-area" id="mockup-slider">
+                        </div>
+
+                    <div class="mock-content">
+                        <div class="mock-line w-50"></div>
+                        <div class="mock-line w-80"></div>
+                        <div class="mock-line"></div>
+                        <div class="mock-line"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, deleteDoc, doc, query, orderBy, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Konfigurasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // 1. CEK ADMIN
+        onAuthStateChanged(auth, (user) => {
+            if (!user || !user.email.endsWith('@ac.id')) {
+                // Jika bukan admin, tendang
+                window.location.href = "../../dashboard/index.html";
+            } else {
+                // Jika admin, load data
+                loadBanners();
+            }
+        });
+
+        // 2. UI HANDLER (File Input)
+        const fileInput = document.getElementById('file-input');
+        const uploadBtn = document.getElementById('btn-upload');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        fileInput.addEventListener('change', (e) => {
+            if(fileInput.files.length > 0) {
+                fileNameDisplay.innerText = fileInput.files[0].name;
+                uploadBtn.classList.add('ready');
+            }
+        });
+
+        // 3. UPLOAD FUNCTION (ImgBB + Firebase)
+        uploadBtn.addEventListener('click', async () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            document.getElementById('loader-overlay').style.display = 'flex';
+
+            const formData = new FormData();
+            formData.append("image", file);
+
+            try {
+                // A. Upload ke ImgBB
+                const response = await fetch("https://api.imgbb.com/1/upload?key=2f45fcafb6dfb2dbae295499022ce476", {
+                    method: "POST",
+                    body: formData
+                });
+                const result = await response.json();
+
+                if (result.success) {
+                    const imageUrl = result.data.url;
+
+                    // B. Simpan Link ke Firestore
+                    await addDoc(collection(db, "banners"), {
+                        imageUrl: imageUrl,
+                        timestamp: serverTimestamp(),
+                        admin: auth.currentUser.email
+                    });
+
+                    showToast("Banner berhasil diterbitkan!");
+                    
+                    // Reset Form
+                    fileInput.value = "";
+                    fileNameDisplay.innerText = "";
+                    uploadBtn.classList.remove('ready');
+                } else {
+                    throw new Error("Gagal upload gambar.");
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert("Error: " + error.message);
+            } finally {
+                document.getElementById('loader-overlay').style.display = 'none';
+            }
+        });
+
+        // 4. LOAD BANNERS (Realtime List + Mockup)
+        function loadBanners() {
+            const listContainer = document.getElementById('banner-list-container');
+            const mockupContainer = document.getElementById('mockup-slider');
+
+            const q = query(collection(db, "banners"), orderBy("timestamp", "desc"));
+
+            onSnapshot(q, (snapshot) => {
+                listContainer.innerHTML = "";
+                mockupContainer.innerHTML = "";
+                
+                if (snapshot.empty) {
+                    listContainer.innerHTML = "<p style='text-align:center; padding:20px;'>Tidak ada banner aktif.</p>";
+                    return;
+                }
+
+                let index = 0;
+                snapshot.forEach((docSnap) => {
+                    const data = docSnap.data();
+                    const docId = docSnap.id;
+
+                    // A. Render List (Ada Tombol Hapus)
+                    const item = document.createElement('div');
+                    item.className = 'banner-item';
+                    item.innerHTML = `
+                        <div style="display:flex; align-items:center;">
+                            <img src="${data.imageUrl}" class="banner-thumb">
+                            <div class="banner-info">
+                                <div style="font-weight:600; font-size:0.85rem;">Banner #${index + 1}</div>
+                                <div class="banner-date">Diupload: ${data.admin || 'Admin'}</div>
+                            </div>
+                        </div>
+                        <button class="btn-delete" onclick="deleteBanner('${docId}')">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    `;
+                    listContainer.appendChild(item);
+
+                    // B. Render Mockup (Preview HP)
+                    const mockImg = document.createElement('img');
+                    mockImg.src = data.imageUrl;
+                    mockImg.className = index === 0 ? 'mock-banner active' : 'mock-banner';
+                    mockupContainer.appendChild(mockImg);
+
+                    index++;
+                });
+
+                // Jalankan Slider di Mockup
+                startMockupSlider();
+            });
+        }
+
+        // 5. DELETE FUNCTION (Global Scope)
+        window.deleteBanner = async function(docId) {
+            if(confirm("Yakin ingin menghapus banner ini dari aplikasi siswa?")) {
+                try {
+                    await deleteDoc(doc(db, "banners", docId));
+                    showToast("Banner dihapus.");
+                } catch (e) {
+                    alert("Gagal menghapus: " + e.message);
+                }
+            }
+        }
+
+        // 6. MOCKUP SLIDER ANIMATION
+        let sliderInterval;
+        function startMockupSlider() {
+            if (sliderInterval) clearInterval(sliderInterval);
+            
+            const slides = document.querySelectorAll('.mock-banner');
+            if (slides.length <= 1) return;
+
+            let current = 0;
+            sliderInterval = setInterval(() => {
+                slides[current].classList.remove('active');
+                current = (current + 1) % slides.length;
+                slides[current].classList.add('active');
+            }, 3000); // Ganti gambar tiap 3 detik di mockup
+        }
+
+        function showToast(msg) {
+            const area = document.getElementById('notification-area');
+            area.innerHTML = `<div class="toast show">${msg}</div>`;
+            setTimeout(() => { area.innerHTML = ''; }, 3000);
+        }
+    </script>
+</body>
+</html>
