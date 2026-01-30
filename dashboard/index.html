@@ -14,23 +14,12 @@
             --mustard: #ffc107;
             --white: #ffffff;
             --gray: #8892b0;
-            --light-gray: #f4f4f4;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: #f0f2f5; padding-bottom: 60px; min-height: 100vh; }
 
-        body {
-            background-color: #f0f2f5; /* Background terang untuk Dashboard agar konten terbaca jelas */
-            color: #333;
-            padding-bottom: 60px; /* Space untuk footer */
-        }
-
-        /* --- 1. HEADER NAVY --- */
+        /* --- HEADER --- */
         header {
             background-color: var(--navy-dark);
             padding: 15px 20px;
@@ -42,320 +31,106 @@
             z-index: 100;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-logo { width: 40px; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1.1rem; }
+        .header-profile { color: var(--mustard); font-size: 1.8rem; cursor: pointer; }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .header-logo {
-            width: 40px;
-            height: auto;
-        }
-
-        .header-title {
-            color: var(--white);
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: 0.5px;
-        }
-
-        .header-profile {
-            color: var(--mustard);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .header-profile:hover {
-            color: var(--white);
-        }
-
-        /* --- 2. BANNER SLIDER --- */
+        /* --- BANNER --- */
         .banner-container {
             width: 100%;
-            height: 200px; /* Mobile height */
+            height: 200px;
             background-color: #ddd;
             position: relative;
             overflow: hidden;
             margin-bottom: 20px;
         }
-
         .banner-slide {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+            width: 100%; height: 100%; object-fit: cover;
+            position: absolute; top: 0; left: 0;
+            opacity: 0; transition: opacity 1s ease-in-out;
         }
+        .banner-slide.active { opacity: 1; }
 
-        .banner-slide.active {
-            opacity: 1;
-        }
-
-        /* Loading Skeleton untuk Banner */
-        .skeleton {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, #eee, #f5f5f5, #eee);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-        }
-
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        /* --- 3 & 4. ACTION BUTTONS (MENU UTAMA) --- */
-        .action-menu {
-            display: flex;
-            gap: 15px;
-            padding: 0 20px;
-            margin-bottom: 30px;
-        }
-
+        /* --- MENU --- */
+        .action-menu { display: flex; gap: 15px; padding: 0 20px; margin-bottom: 30px; }
         .action-card {
-            flex: 1;
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--navy-dark);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            flex: 1; background: var(--white); padding: 20px;
+            border-radius: 12px; text-align: center; text-decoration: none;
+            color: var(--navy-dark); box-shadow: 0 4px 10px rgba(0,0,0,0.05);
             transition: 0.3s;
-            border: 1px solid transparent;
         }
+        .action-card:hover { transform: translateY(-3px); border: 1px solid var(--mustard); }
+        .action-icon { font-size: 2rem; margin-bottom: 10px; }
 
-        .action-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--mustard);
-        }
-
-        .action-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--navy-dark);
-        }
-
-        .action-card h3 {
-            font-size: 1rem;
-            font-weight: 600;
-        }
-
-        /* --- 5. BUKU TERBITAN BARU --- */
+        /* --- BUKU TERBARU --- */
         .section-title {
-            padding: 0 20px;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--navy-dark);
-            border-left: 4px solid var(--mustard);
-            padding-left: 10px;
-            margin-left: 20px;
+            padding: 0 20px; margin-bottom: 15px; font-size: 1.1rem;
+            font-weight: 700; color: var(--navy-dark);
+            border-left: 4px solid var(--mustard); margin-left: 20px;
         }
-
         .book-scroll-container {
-            display: flex;
-            overflow-x: auto;
-            gap: 15px;
-            padding: 0 20px 20px 20px;
-            scroll-behavior: smooth;
-            /* Hide scrollbar */
-            -ms-overflow-style: none;  
-            scrollbar-width: none;  
+            display: flex; overflow-x: auto; gap: 15px; padding: 0 20px 20px 20px;
+            scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none;
         }
-
-        .book-scroll-container::-webkit-scrollbar {
-            display: none;
-        }
-
+        .book-scroll-container::-webkit-scrollbar { display: none; }
         .book-card {
-            min-width: 140px;
-            max-width: 140px;
-            background: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            flex-shrink: 0;
-            transition: 0.3s;
-            cursor: pointer;
+            min-width: 140px; max-width: 140px; background: var(--white);
+            border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            flex-shrink: 0; cursor: pointer;
         }
+        .book-cover { width: 100%; height: 200px; object-fit: cover; }
+        .book-info { padding: 10px; }
+        .book-title { font-size: 0.9rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .book-price { font-size: 0.8rem; color: var(--mustard); font-weight: 700; }
 
-        .book-cover {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-
-        .book-info {
-            padding: 10px;
-        }
-
-        .book-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 5px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .book-price {
-            font-size: 0.8rem;
-            color: var(--mustard); /* Warna harga menonjol */
-            font-weight: 700;
-        }
-
-        /* --- 6. TIM CENDEKIA (INFINITE CAROUSEL) --- */
-        .team-section {
-            padding: 20px 0;
-            margin-bottom: 40px;
-        }
-
+        /* --- TIM (SLIDER) --- */
+        .team-section { padding: 20px 0; margin-bottom: 40px; }
         .team-container {
-            padding: 0 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 250px;
-            position: relative;
+            padding: 0 20px; display: flex; justify-content: center;
+            align-items: center; height: 180px; position: relative; overflow: hidden;
         }
-
         .team-card {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            width: 80%;
-            max-width: 300px;
-            position: absolute;
-            opacity: 0;
-            transform: translateX(100px);
-            transition: all 0.5s ease-in-out;
+            background: var(--white); padding: 15px; border-radius: 12px;
+            text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 80%; max-width: 300px; position: absolute;
+            transition: all 0.5s ease-in-out; opacity: 0; transform: translateX(100%);
+        }
+        .team-card.active { opacity: 1; transform: translateX(0); }
+        .team-card.exit { opacity: 0; transform: translateX(-100%); }
+        .team-img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin-bottom: 10px; border: 2px solid var(--mustard); }
+
+        /* --- FOOTER --- */
+        footer { background-color: var(--navy-dark); color: var(--white); padding: 40px 20px 20px 20px; font-size: 0.9rem; }
+        .footer-content { display: grid; gap: 30px; margin-bottom: 30px; }
+        .footer-logo img { width: 60px; margin-bottom: 10px; }
+        .footer-section h4 { color: var(--mustard); margin-bottom: 15px; }
+        .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; color: #ccc; }
+        .social-links a { color: var(--white); font-size: 1.5rem; margin-right: 15px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center; color: var(--gray); font-size: 0.8rem; }
+        .footer-bottom a { color: var(--mustard); text-decoration: none; }
+
+        /* Loader Overlay */
+        #loader-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--navy-dark); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column; color: var(--mustard); transition: opacity 0.5s;
         }
 
-        .team-card.active {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .team-card.exit {
-            opacity: 0;
-            transform: translateX(-100px);
-        }
-
-        .team-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-            border: 2px solid var(--mustard);
-        }
-
-        .team-name {
-            font-weight: 700;
-            color: var(--navy-dark);
-        }
-
-        .team-role {
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        /* --- 7. FOOTER --- */
-        footer {
-            background-color: var(--navy-dark);
-            color: var(--white);
-            padding: 40px 20px 20px 20px;
-            font-size: 0.9rem;
-        }
-
-        .footer-content {
-            display: grid;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .footer-logo img {
-            width: 60px;
-            margin-bottom: 10px;
-        }
-
-        .footer-section h4 {
-            color: var(--mustard);
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 10px;
-            color: #ccc;
-        }
-
-        .contact-item i {
-            width: 20px;
-            text-align: center;
-        }
-
-        .social-links a {
-            color: var(--white);
-            font-size: 1.5rem;
-            margin-right: 15px;
-            transition: 0.3s;
-        }
-
-        .social-links a:hover {
-            color: var(--mustard);
-        }
-
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 20px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: var(--gray);
-        }
-
-        .footer-bottom a {
-            color: var(--mustard);
-            text-decoration: none;
-        }
-
-        /* RESPONSIF LAPTOP */
         @media (min-width: 1024px) {
-            .banner-container {
-                height: 400px;
-            }
-            
-            .action-menu {
-                justify-content: center;
-                gap: 40px;
-            }
-
-            .action-card {
-                max-width: 300px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr 1fr 1fr;
-                max-width: 1200px;
-                margin: 0 auto 30px auto;
-            }
+            .banner-container { height: 400px; }
+            .action-menu { justify-content: center; gap: 40px; }
+            .footer-content { grid-template-columns: 1fr 1fr 1fr; max-width: 1200px; margin: 0 auto 30px auto; }
         }
     </style>
 </head>
 <body>
+
+    <div id="loader-overlay">
+        <i class="fas fa-circle-notch fa-spin fa-3x"></i>
+        <p style="margin-top: 15px;">Memuat Data Cendekia...</p>
+    </div>
 
     <header>
         <div class="header-left">
@@ -368,16 +143,14 @@
     </header>
 
     <section class="banner-container" id="banner-container">
-        <div class="skeleton"></div>
-        
         </section>
 
     <section class="action-menu">
-        <a href="terbit/index.html" class="action-card">
+        <a href="../terbit/index.html" class="action-card">
             <div class="action-icon" style="color: var(--navy-dark);"><i class="fas fa-book-medical"></i></div>
             <h3>Terbitkan Buku</h3>
         </a>
-        <a href="magazine/index.html" class="action-card">
+        <a href="../magazine/index.html" class="action-card">
             <div class="action-icon" style="color: var(--mustard);"><i class="fas fa-newspaper"></i></div>
             <h3>Baca Majalah</h3>
         </a>
@@ -386,21 +159,8 @@
     <section id="new-releases">
         <h3 class="section-title">Buku Terbitan Baru</h3>
         <div class="book-scroll-container" id="book-list">
-            <div class="book-card" onclick="window.location.href='#'">
-                <img src="https://via.placeholder.com/150x200?text=Cover+1" class="book-cover">
-                <div class="book-info">
-                    <div class="book-title">Menjemput Senja di Magelang</div>
-                    <div class="book-price">Rp 45.000</div>
-                </div>
-            </div>
-            <div class="book-card" onclick="window.location.href='#'">
-                <img src="https://via.placeholder.com/150x200?text=Cover+2" class="book-cover">
-                <div class="book-info">
-                    <div class="book-title">Antologi Puisi Siswa</div>
-                    <div class="book-price">Gratis</div>
-                </div>
-            </div>
-            </div>
+            <p style="padding: 10px; color: #888;">Mengambil data buku...</p>
+        </div>
     </section>
 
     <section class="team-section">
@@ -415,65 +175,92 @@
                 <div class="footer-logo">
                     <img src="https://imgur.com/5Srjyo4.png" alt="Logo White">
                 </div>
-                <p>Cendekia Press adalah lini penerbitan resmi dari komunitas menulis Cendekia Aksara. Kami membantu penulis pemula menerbitkan mimpi.</p>
+                <p>Cendekia Press, lini penerbitan resmi Cendekia Aksara. Mewujudkan mimpi penulis pemula menjadi nyata.</p>
             </div>
-            
             <div class="footer-section">
                 <h4>Alamat Kami</h4>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span><b>Pusat:</b> Temanggung, Jawa Tengah</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-pin"></i>
-                    <span><b>Cabang 1:</b> Magelang, Jawa Tengah</span>
-                </div>
+                <div class="contact-item"><i class="fas fa-map-marker-alt"></i><span><b>Pusat:</b> Temanggung, Jawa Tengah</span></div>
+                <div class="contact-item"><i class="fas fa-map-pin"></i><span><b>Cabang 1:</b> Magelang, Jawa Tengah</span></div>
             </div>
-
             <div class="footer-section">
                 <h4>Kontak Admin</h4>
-                <div class="contact-item">
-                    <i class="fab fa-whatsapp"></i>
-                    <span>0889-5615-630 (Kak Saras)</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>cendekia.aksara@gmail.com</span>
-                </div>
+                <div class="contact-item"><i class="fab fa-whatsapp"></i><span>0889-5615-630 (Kak Saras)</span></div>
+                <div class="contact-item"><i class="fas fa-envelope"></i><span>cendekia.aksara@gmail.com</span></div>
                 <div class="social-links" style="margin-top: 15px;">
                     <a href="https://instagram.com/cendekia.press"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>&copy; 2026 Cendekia Press. All Rights Reserved.</p>
-            <p style="margin-top: 5px;">
-                <a href="privacy.html">Kebijakan Privasi</a> | <a href="#">Syarat & Ketentuan</a>
-            </p>
+            <p style="margin-top: 5px;"><a href="privacy.html">Kebijakan Privasi</a></p>
         </div>
     </footer>
 
-    <script>
-        // --- 1. LOGIKA BANNER SLIDER ---
-        // Nanti Data ini diambil dari Firebase/Admin Panel
-        // Format: URL Gambar dari ImgBB
-        const bannerData = [
-            "https://via.placeholder.com/800x400/0a192f/ffc107?text=Banner+Selamat+Datang",
-            "https://via.placeholder.com/800x400/172a45/ffffff?text=Promo+Cetak+Buku",
-            "https://via.placeholder.com/800x400/ffc107/0a192f?text=Event+Menulis"
-        ];
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, getDocs, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const bannerContainer = document.getElementById('banner-container');
-        let currentBannerIndex = 0;
+        // Konfigurasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
 
-        function initBanner() {
-            // Hapus skeleton loading
-            bannerContainer.innerHTML = '';
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // --- 1. CEK OTENTIKASI (Tanpa Local Storage) ---
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User login, muat data
+                loadDashboardData();
+            } else {
+                // User belum login, tendang ke halaman depan
+                window.location.href = "../index.html";
+            }
+        });
+
+        // --- FUNGSI LOAD DATA UTAMA ---
+        async function loadDashboardData() {
+            try {
+                await Promise.all([loadBanners(), loadBooks(), loadTeam()]);
+                // Hilangkan Loader setelah semua selesai
+                document.getElementById('loader-overlay').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader-overlay').style.display = 'none';
+                }, 500);
+            } catch (error) {
+                console.error("Gagal memuat data:", error);
+            }
+        }
+
+        // --- 2. LOAD BANNER DARI FIRESTORE ---
+        async function loadBanners() {
+            const bannerContainer = document.getElementById('banner-container');
+            const q = query(collection(db, "banners"), orderBy("timestamp", "desc")); // Asumsi ada field timestamp
+            const querySnapshot = await getDocs(q);
             
-            // Buat elemen gambar
-            bannerData.forEach((src, index) => {
+            bannerContainer.innerHTML = ""; // Bersihkan placeholder
+            let banners = [];
+
+            if (querySnapshot.empty) {
+                // Default jika database kosong
+                banners = ["https://via.placeholder.com/800x400/0a192f/ffc107?text=Selamat+Datang+Cendekia"];
+            } else {
+                querySnapshot.forEach((doc) => {
+                    banners.push(doc.data().imageUrl); // Pastikan field di DB bernama 'imageUrl'
+                });
+            }
+
+            // Render Banner
+            banners.forEach((src, index) => {
                 const img = document.createElement('img');
                 img.src = src;
                 img.classList.add('banner-slide');
@@ -481,67 +268,98 @@
                 bannerContainer.appendChild(img);
             });
 
-            // Jalankan Interval 5 Detik
-            setInterval(() => {
-                const slides = document.querySelectorAll('.banner-slide');
-                slides[currentBannerIndex].classList.remove('active');
-                
-                // Pindah ke index selanjutnya (looping)
-                currentBannerIndex = (currentBannerIndex + 1) % slides.length;
-                
-                slides[currentBannerIndex].classList.add('active');
-            }, 5000); // 5000ms = 5 detik
+            // Jalankan Rotasi
+            let currentBanner = 0;
+            if(banners.length > 1) {
+                setInterval(() => {
+                    const slides = document.querySelectorAll('.banner-slide');
+                    slides[currentBanner].classList.remove('active');
+                    currentBanner = (currentBanner + 1) % slides.length;
+                    slides[currentBanner].classList.add('active');
+                }, 5000);
+            }
         }
 
-        // --- 2. LOGIKA TIM CAROUSEL (INFINITE LOOP) ---
-        // Nanti data dari Admin Panel
-        const teamData = [
-            { name: "Kak Saras", role: "Admin Utama", img: "https://via.placeholder.com/100" },
-            { name: "Kak Aksa", role: "Manager Ops", img: "https://via.placeholder.com/100" },
-            { name: "Tim Layout", role: "Artist", img: "https://via.placeholder.com/100" }
-        ];
+        // --- 3. LOAD BUKU DARI FIRESTORE ---
+        async function loadBooks() {
+            const bookList = document.getElementById('book-list');
+            const q = query(collection(db, "books"), orderBy("createdAt", "desc"), limit(10));
+            const querySnapshot = await getDocs(q);
 
-        const teamContainer = document.getElementById('team-slider');
-        let currentTeamIndex = 0;
+            bookList.innerHTML = ""; 
 
-        function renderTeam() {
-            // Kita buat efek ganti konten di dalam satu kartu atau kartu bergulir
-            // Untuk simple logic "berganti ke samping":
-            updateTeamCard();
+            if (querySnapshot.empty) {
+                bookList.innerHTML = "<p style='padding:10px;'>Belum ada buku terbit.</p>";
+                return;
+            }
 
-            setInterval(() => {
-                // Animasi keluar
-                const currentCard = document.querySelector('.team-card');
-                if(currentCard) {
-                    currentCard.classList.remove('active');
-                    currentCard.classList.add('exit');
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                // Tentukan link tujuan (Buku Gratis vs Berbayar)
+                let linkTujuan = "#";
+                if(data.price === 0 || data.price === "Gratis") {
+                    linkTujuan = data.linkDownload || "#"; // Link GDrive/PDF
+                } else {
+                    linkTujuan = data.linkJual || "#"; // Link WA/Shopee
                 }
-                
-                // Tunggu animasi selesai baru ganti data dan masuk lagi
-                setTimeout(() => {
-                    currentTeamIndex = (currentTeamIndex + 1) % teamData.length;
-                    updateTeamCard();
-                }, 500); // Setengah detik delay transisi
-                
-            }, 5000);
+
+                const card = `
+                <div class="book-card" onclick="window.location.href='${linkTujuan}'">
+                    <img src="${data.coverUrl}" class="book-cover" alt="${data.title}">
+                    <div class="book-info">
+                        <div class="book-title">${data.title}</div>
+                        <div class="book-price">${data.price === 0 ? "GRATIS" : "Rp " + data.price}</div>
+                    </div>
+                </div>`;
+                bookList.innerHTML += card;
+            });
         }
 
-        function updateTeamCard() {
-            const member = teamData[currentTeamIndex];
-            teamContainer.innerHTML = `
-                <div class="team-card active">
-                    <img src="${member.img}" class="team-img" alt="${member.name}">
-                    <div class="team-name">${member.name}</div>
-                    <div class="team-role">${member.role}</div>
-                </div>
-            `;
-        }
+        // --- 4. LOAD TIM DARI FIRESTORE ---
+        async function loadTeam() {
+            const teamContainer = document.getElementById('team-slider');
+            const q = query(collection(db, "teams"));
+            const querySnapshot = await getDocs(q);
 
-        // --- JALANKAN SAAT HALAMAN DIMUAT ---
-        document.addEventListener('DOMContentLoaded', () => {
-            initBanner();
-            renderTeam();
-        });
+            let teamMembers = [];
+            if (querySnapshot.empty) {
+                // Default
+                teamMembers = [{name: "Admin", role: "Cendekia Press", photoUrl: "https://via.placeholder.com/100"}];
+            } else {
+                querySnapshot.forEach((doc) => {
+                    teamMembers.push(doc.data());
+                });
+            }
+
+            // Fungsi Render Satu Kartu
+            let currentIndex = 0;
+            function renderCard() {
+                const member = teamMembers[currentIndex];
+                teamContainer.innerHTML = `
+                    <div class="team-card active">
+                        <img src="${member.photoUrl}" class="team-img">
+                        <div class="team-name">${member.name}</div>
+                        <div class="team-role">${member.role}</div>
+                    </div>
+                `;
+            }
+
+            renderCard();
+
+            // Rotasi Tim (Geser setiap 5 detik)
+            if(teamMembers.length > 1) {
+                setInterval(() => {
+                    const card = document.querySelector('.team-card');
+                    card.classList.remove('active');
+                    card.classList.add('exit');
+
+                    setTimeout(() => {
+                        currentIndex = (currentIndex + 1) % teamMembers.length;
+                        renderCard(); // Akan merender kartu baru dengan class 'active'
+                    }, 500);
+                }, 5000);
+            }
+        }
     </script>
 </body>
 </html>
