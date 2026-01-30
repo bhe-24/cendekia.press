@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Naskah - Admin Cendekia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
+            --white: #ffffff;
+            --light-bg: #f4f6f9;
+            --success: #28a745; /* Hijau untuk Gratis */
+            --primary: #007bff; /* Biru untuk Reguler */
+            --premium: #fd7e14; /* Orange untuk Ekspres */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { background-color: var(--light-bg); min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--navy-dark);
+            padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-logo-wrapper {
+            width: 40px; height: 40px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--mustard);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header-logo { width: 60%; height: auto; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+        
+        /* Tombol Kembali ke Menu Utama */
+        .btn-back {
+            color: var(--mustard); text-decoration: none; font-weight: 600;
+            font-size: 0.9rem; display: flex; align-items: center; gap: 8px;
+            border: 1px solid var(--mustard); padding: 5px 15px; border-radius: 20px;
+            transition: 0.3s;
+        }
+        .btn-back:hover { background: var(--mustard); color: var(--navy-dark); }
+
+        /* --- MAIN CONTENT --- */
+        main { flex: 1; padding: 30px 20px; max-width: 1200px; margin: 0 auto; width: 100%; }
+
+        .page-header { margin-bottom: 30px; }
+        .page-header h2 { color: var(--navy-dark); font-size: 1.5rem; font-weight: 700; }
+        .page-header p { color: #666; font-size: 0.9rem; }
+
+        /* --- CATEGORY CARDS (Tombol Navigasi) --- */
+        .category-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px; margin-bottom: 40px;
+        }
+
+        .cat-card {
+            background: var(--white); padding: 25px; border-radius: 12px;
+            text-decoration: none; color: #333; position: relative; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s;
+            border-left: 5px solid transparent; display: flex; flex-direction: column; justify-content: space-between;
+            height: 140px;
+        }
+        .cat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+
+        /* Warna Spesifik per Kartu */
+        .cat-gratis { border-left-color: var(--success); }
+        .cat-gratis .cat-icon { color: var(--success); background: #e8f5e9; }
+        
+        .cat-reguler { border-left-color: var(--navy-dark); }
+        .cat-reguler .cat-icon { color: var(--navy-dark); background: #e3f2fd; }
+        
+        .cat-ekspres { border-left-color: var(--premium); }
+        .cat-ekspres .cat-icon { color: var(--premium); background: #fff3e0; }
+
+        .cat-header { display: flex; justify-content: space-between; align-items: start; }
+        .cat-icon { width: 50px; height: 50px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; }
+        .cat-title { font-size: 1.1rem; font-weight: 700; color: var(--navy-dark); margin-top: 10px; }
+        
+        .cat-count { font-size: 2rem; font-weight: 700; color: #333; align-self: flex-end; }
+        .cat-label { font-size: 0.8rem; color: #888; align-self: flex-end; }
+
+        /* --- GLOBAL TABLE --- */
+        .table-container {
+            background: var(--white); padding: 25px; border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .table-header { margin-bottom: 20px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .table-header h3 { font-size: 1.1rem; color: var(--navy-dark); }
+
+        .responsive-table { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+        th { text-align: left; padding: 12px; background: #f8f9fa; color: var(--navy-light); font-weight: 600; }
+        td { padding: 12px; border-bottom: 1px solid #eee; color: #555; vertical-align: middle; }
+        tr:hover { background: #f9f9f9; }
+
+        .badge-pkt { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 600; display: inline-block; }
+        .bg-gratis { background: #e8f5e9; color: var(--success); }
+        .bg-reguler { background: #e3f2fd; color: var(--navy-dark); }
+        .bg-ekspres { background: #fff3e0; color: var(--premium); border: 1px solid var(--premium); }
+
+        /* Loader */
+        #loader-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--navy-dark); z-index: 9999;
+            display: flex; justify-content: center; align-items: center;
+            flex-direction: column; color: var(--mustard);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader-overlay">
+        <i class="fas fa-circle-notch fa-spin fa-3x"></i>
+        <p style="margin-top: 15px;">Sinkronisasi Data...</p>
+    </div>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logo-wrapper">
+                <img src="https://i.imgur.com/5Srjyo4.png" alt="Logo" class="header-logo">
+            </div>
+            <div class="header-title">MANAJEMEN NASKAH</div>
+        </div>
+        <a href="../index.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Menu Utama
+        </a>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h2>Pusat Kontrol Penerbitan</h2>
+            <p>Pilih kategori untuk melihat detail, alamat, dan memproses naskah.</p>
+        </div>
+
+        <div class="category-grid">
+            <a href="gratis.html" class="cat-card cat-gratis">
+                <div class="cat-header">
+                    <div class="cat-icon"><i class="fas fa-dove"></i></div>
+                    <div>
+                        <span class="cat-count" id="count-gratis">0</span>
+                        <div class="cat-label">Naskah</div>
+                    </div>
+                </div>
+                <div class="cat-title">Jalur Gratis (Indie)</div>
+            </a>
+
+            <a href="reguler.html" class="cat-card cat-reguler">
+                <div class="cat-header">
+                    <div class="cat-icon"><i class="fas fa-book"></i></div>
+                    <div>
+                        <span class="cat-count" id="count-reguler">0</span>
+                        <div class="cat-label">Naskah</div>
+                    </div>
+                </div>
+                <div class="cat-title">Jalur Reguler</div>
+            </a>
+
+            <a href="ekspres.html" class="cat-card cat-ekspres">
+                <div class="cat-header">
+                    <div class="cat-icon"><i class="fas fa-bolt"></i></div>
+                    <div>
+                        <span class="cat-count" id="count-ekspres">0</span>
+                        <div class="cat-label">Naskah</div>
+                    </div>
+                </div>
+                <div class="cat-title">Jalur Ekspres (VIP)</div>
+            </a>
+        </div>
+
+        <div class="table-container">
+            <div class="table-header">
+                <h3><i class="fas fa-list"></i> Ringkasan Semua Naskah Masuk</h3>
+            </div>
+            <div class="responsive-table">
+                <table id="global-table">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Penulis</th>
+                            <th>Judul Naskah</th>
+                            <th>Kategori Paket</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, query, orderBy, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Konfigurasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // 1. CEK ADMIN
+        onAuthStateChanged(auth, (user) => {
+            if (user && user.email.endsWith('@ac.id')) {
+                document.getElementById('loader-overlay').style.display = 'none';
+                loadAllSubmissions();
+            } else {
+                window.location.href = "../../dashboard/index.html";
+            }
+        });
+
+        // 2. LOAD DATA & HITUNG STATISTIK
+        function loadAllSubmissions() {
+            const tableBody = document.getElementById('table-body');
+            const countGratis = document.getElementById('count-gratis');
+            const countReguler = document.getElementById('count-reguler');
+            const countEkspres = document.getElementById('count-ekspres');
+
+            // Ambil semua data diurutkan waktu terbaru
+            const q = query(collection(db, "submissions"), orderBy("timestamp", "desc"));
+
+            onSnapshot(q, (snapshot) => {
+                tableBody.innerHTML = "";
+                
+                // Variabel hitung
+                let cG = 0, cR = 0, cE = 0;
+
+                if (snapshot.empty) {
+                    tableBody.innerHTML = "<tr><td colspan='5' style='text-align:center; padding:20px;'>Belum ada data.</td></tr>";
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    
+                    // Hitung Kategori
+                    if (data.paket.includes("Gratis")) cG++;
+                    else if (data.paket.includes("Reguler")) cR++;
+                    else if (data.paket.includes("Ekspres")) cE++;
+
+                    // Format Tanggal
+                    let dateStr = "-";
+                    if(data.timestamp) {
+                        dateStr = data.timestamp.toDate().toLocaleDateString("id-ID", {
+                            day: 'numeric', month: 'short', year: 'numeric'
+                        });
+                    }
+
+                    // Tentukan Badge Warna
+                    let badgeClass = "bg-reguler";
+                    if(data.paket.includes("Gratis")) badgeClass = "bg-gratis";
+                    if(data.paket.includes("Ekspres")) badgeClass = "bg-ekspres";
+
+                    // Render Baris Tabel
+                    const row = `
+                    <tr>
+                        <td>${dateStr}</td>
+                        <td><b>${data.nama}</b></td>
+                        <td>${data.judul}</td>
+                        <td><span class="badge-pkt ${badgeClass}">${data.paket}</span></td>
+                        <td>${data.status || 'Menunggu'}</td>
+                    </tr>
+                    `;
+                    tableBody.innerHTML += row;
+                });
+
+                // Update Angka di Kartu
+                countGratis.innerText = cG;
+                countReguler.innerText = cR;
+                countEkspres.innerText = cE;
+            });
+        }
+    </script>
+</body>
+</html>
