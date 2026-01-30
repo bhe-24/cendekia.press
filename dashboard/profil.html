@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Saya - Cendekia Aksara Press</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --navy-dark: #0a192f;
+            --navy-light: #172a45;
+            --mustard: #ffc107;
+            --mustard-hover: #e0a800;
+            --white: #ffffff;
+            --gray: #8892b0;
+            --danger: #ff4444;
+            --success: #00C851;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body { 
+            background-color: #f0f2f5; 
+            min-height: 100vh; 
+            display: flex; flex-direction: column; 
+        }
+
+        /* --- HEADER --- */
+        header {
+            background-color: var(--navy-dark);
+            padding: 10px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 100;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        .header-logo-wrapper {
+            width: 45px; height: 45px;
+            background: var(--white);
+            border-radius: 50%;
+            border: 2px solid var(--mustard);
+            display: flex; justify-content: center; align-items: center;
+        }
+        .header-logo { width: 60%; height: auto; }
+        .header-title { color: var(--white); font-weight: 700; font-size: 1rem; }
+        
+        /* Tombol Kembali ke Dashboard */
+        .back-btn { color: var(--mustard); font-size: 1.2rem; text-decoration: none; }
+
+        /* --- MAIN CONTENT --- */
+        main { flex: 1; padding: 20px; max-width: 600px; margin: 0 auto; width: 100%; }
+
+        /* --- PROFILE PICTURE SECTION --- */
+        .profile-header {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .img-container {
+            position: relative;
+            width: 120px; height: 120px;
+            margin: 0 auto 15px auto;
+        }
+
+        .profile-img {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--mustard);
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.3);
+        }
+
+        .upload-icon {
+            position: absolute;
+            bottom: 5px; right: 5px;
+            background: var(--navy-dark);
+            color: var(--white);
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            border: 2px solid var(--white);
+            transition: 0.3s;
+        }
+        .upload-icon:hover { background: var(--mustard); color: var(--navy-dark); }
+
+        .user-email { color: var(--gray); font-size: 0.9rem; margin-top: 5px; }
+
+        /* --- FORM SECTION --- */
+        .form-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.85rem; color: var(--navy-dark); font-weight: 600; margin-bottom: 8px; }
+        
+        .form-control {
+            width: 100%; padding: 12px;
+            border: 1px solid #ddd; border-radius: 8px;
+            font-size: 0.9rem; outline: none; transition: 0.3s;
+        }
+        .form-control:focus { border-color: var(--mustard); box-shadow: 0 0 5px rgba(255, 193, 7, 0.2); }
+        textarea.form-control { resize: vertical; min-height: 80px; }
+
+        /* Buttons */
+        .btn-save {
+            width: 100%; padding: 12px;
+            background: var(--navy-dark); color: var(--white);
+            border: none; border-radius: 8px;
+            font-weight: 600; cursor: pointer; margin-top: 10px;
+            transition: 0.3s;
+        }
+        .btn-save:hover { background: var(--navy-light); }
+
+        .btn-logout {
+            display: block; width: 100%; padding: 12px;
+            background: transparent; color: var(--danger);
+            border: 1px solid var(--danger); border-radius: 8px;
+            font-weight: 600; cursor: pointer; margin-top: 20px;
+            text-align: center; text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-logout:hover { background: var(--danger); color: var(--white); }
+
+        /* --- TOAST NOTIFICATION --- */
+        #notification-area {
+            position: fixed; top: 20px; right: 20px; z-index: 9999;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .toast {
+            min-width: 250px; padding: 15px; border-radius: 8px;
+            background: var(--white); color: var(--navy-dark);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            display: flex; align-items: center; gap: 10px;
+            transform: translateX(120%); transition: transform 0.3s ease;
+            border-left: 5px solid; font-size: 0.9rem;
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.success { border-left-color: var(--success); }
+        .toast.error { border-left-color: var(--danger); }
+        .toast.loading { border-left-color: var(--mustard); }
+
+        /* Loader Overlay (Saat Upload) */
+        #loader-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.8); z-index: 9999;
+            display: none; justify-content: center; align-items: center;
+            flex-direction: column; color: var(--mustard);
+        }
+
+        /* Footer */
+        footer { 
+            background-color: var(--navy-dark); color: var(--white); 
+            padding: 15px; text-align: center; font-size: 0.7rem; margin-top: auto; 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="notification-area"></div>
+
+    <div id="loader-overlay">
+        <i class="fas fa-circle-notch fa-spin fa-3x"></i>
+        <p style="margin-top: 15px;">Mengunggah gambar...</p>
+    </div>
+
+    <header>
+        <div class="header-left">
+            <div class="header-logo-wrapper">
+                <img src="https://i.imgur.com/5Srjyo4.png" alt="Logo" class="header-logo">
+            </div>
+            <div class="header-title">PROFIL SAYA</div>
+        </div>
+        <a href="index.html" class="back-btn"><i class="fas fa-times"></i></a>
+    </header>
+
+    <main>
+        <div class="profile-header">
+            <div class="img-container">
+                <img src="https://via.placeholder.com/150" id="current-profile-img" class="profile-img" alt="Foto Profil">
+                <label for="file-input" class="upload-icon">
+                    <i class="fas fa-camera"></i>
+                </label>
+                <input type="file" id="file-input" accept="image/*" style="display: none;">
+            </div>
+            <h3 id="display-name">Memuat Nama...</h3>
+            <p class="user-email" id="display-email">user@email.com</p>
+        </div>
+
+        <div class="form-card">
+            <form id="profile-form">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="input-name" class="form-control" placeholder="Nama sesuai KTP/Kartu Pelajar">
+                </div>
+                <div class="form-group">
+                    <label>Nomor WhatsApp</label>
+                    <input type="number" id="input-wa" class="form-control" placeholder="Contoh: 08123456789">
+                </div>
+                <div class="form-group">
+                    <label>Domisili (Kota/Kabupaten)</label>
+                    <input type="text" id="input-city" class="form-control" placeholder="Contoh: Temanggung">
+                </div>
+                <div class="form-group">
+                    <label>Bio Singkat</label>
+                    <textarea id="input-bio" class="form-control" placeholder="Ceritakan sedikit tentang dirimu..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn-save">
+                    <i class="fas fa-save"></i> SIMPAN PERUBAHAN
+                </button>
+            </form>
+            
+            <button id="btn-logout" class="btn-logout">
+                <i class="fas fa-sign-out-alt"></i> KELUAR AKUN
+            </button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cendekia Press. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut, updateProfile } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // Konfigurasi Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBSIfZG7T_iKAofXMxqXWa2qf8dzN1gvbQ",
+            authDomain: "cendekia-press.firebaseapp.com",
+            projectId: "cendekia-press",
+            storageBucket: "cendekia-press.firebasestorage.app",
+            messagingSenderId: "677985700234",
+            appId: "1:677985700234:web:c0d829fdd15c5ab351a073"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        let currentUserUid = null;
+
+        // --- 1. CEK AUTH & LOAD DATA ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserUid = user.uid;
+                
+                // Set data dasar dari Auth
+                document.getElementById('display-email').innerText = user.email;
+                document.getElementById('display-name').innerText = user.displayName || "Pengguna Baru";
+                document.getElementById('input-name').value = user.displayName || "";
+                
+                // Set Foto Profil (jika ada di Auth, pakai. Jika tidak, placeholder)
+                if(user.photoURL) {
+                    document.getElementById('current-profile-img').src = user.photoURL;
+                }
+
+                // Ambil data detail dari Firestore
+                await loadUserProfile(user.uid);
+            } else {
+                window.location.href = "../index.html";
+            }
+        });
+
+        async function loadUserProfile(uid) {
+            try {
+                const docRef = doc(db, "users", uid);
+                const docSnap = await getDoc(docRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    document.getElementById('input-wa').value = data.whatsapp || "";
+                    document.getElementById('input-city').value = data.city || "";
+                    document.getElementById('input-bio').value = data.bio || "";
+                    
+                    // Prioritas foto: Firestore > Auth > Placeholder
+                    if(data.photoUrl) {
+                        document.getElementById('current-profile-img').src = data.photoUrl;
+                    }
+                }
+            } catch (error) {
+                console.error("Error loading profile:", error);
+            }
+        }
+
+        // --- 2. UPLOAD FOTO KE IMGBB ---
+        const fileInput = document.getElementById('file-input');
+        fileInput.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            // Tampilkan Loading
+            document.getElementById('loader-overlay').style.display = 'flex';
+
+            const formData = new FormData();
+            formData.append("image", file);
+
+            try {
+                // Fetch ke ImgBB
+                const response = await fetch("https://api.imgbb.com/1/upload?key=2f45fcafb6dfb2dbae295499022ce476", {
+                    method: "POST",
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    const imageUrl = result.data.url;
+                    
+                    // 1. Update Tampilan
+                    document.getElementById('current-profile-img').src = imageUrl;
+                    
+                    // 2. Simpan URL ke Firestore
+                    const userRef = doc(db, "users", currentUserUid);
+                    await setDoc(userRef, { photoUrl: imageUrl }, { merge: true });
+
+                    // 3. Update Auth Profile (agar sinkron di header lain)
+                    await updateProfile(auth.currentUser, { photoURL: imageUrl });
+
+                    showNotification("Sukses", "Foto profil diperbarui!", "success");
+                } else {
+                    throw new Error("Gagal upload ke ImgBB");
+                }
+            } catch (error) {
+                showNotification("Gagal", "Terjadi kesalahan upload.", "error");
+                console.error(error);
+            } finally {
+                document.getElementById('loader-overlay').style.display = 'none';
+            }
+        });
+
+        // --- 3. SIMPAN BIODATA ---
+        const profileForm = document.getElementById('profile-form');
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('input-name').value;
+            const wa = document.getElementById('input-wa').value;
+            const city = document.getElementById('input-city').value;
+            const bio = document.getElementById('input-bio').value;
+
+            try {
+                // Update Display Name di Auth
+                await updateProfile(auth.currentUser, { displayName: name });
+                document.getElementById('display-name').innerText = name;
+
+                // Update Data di Firestore
+                const userRef = doc(db, "users", currentUserUid);
+                await setDoc(userRef, {
+                    displayName: name,
+                    whatsapp: wa,
+                    city: city,
+                    bio: bio,
+                    email: auth.currentUser.email
+                }, { merge: true });
+
+                showNotification("Tersimpan", "Biodata berhasil diperbarui.", "success");
+            } catch (error) {
+                showNotification("Error", error.message, "error");
+            }
+        });
+
+        // --- 4. LOGOUT ---
+        document.getElementById('btn-logout').addEventListener('click', () => {
+            const confirmLogout = confirm("Yakin ingin keluar?");
+            if(confirmLogout) {
+                signOut(auth).then(() => {
+                    window.location.href = "../index.html";
+                });
+            }
+        });
+
+        // --- UTILS: NOTIFIKASI ---
+        function showNotification(title, message, type) {
+            const area = document.getElementById('notification-area');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<div><b>${title}</b><br>${message}</div>`;
+            area.appendChild(toast);
+            setTimeout(() => { toast.classList.add('show'); }, 100);
+            setTimeout(() => { 
+                toast.classList.remove('show'); 
+                setTimeout(() => toast.remove(), 500); 
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
